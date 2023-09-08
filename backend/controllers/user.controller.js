@@ -4,6 +4,7 @@ import crypto from "crypto";
 import ForgotPasswordToken from "../models/forgotPasswordToken.model.js";
 import { resetPasswordTemplate } from "../templates/resetPasswordTemplate.js";
 import sendEmail from "../helpers/sendEmail.js";
+import UserProfile from "../models/userProfile.model.js";
 
 //=================================SignUp================================================
 const signUp = async (req, res) => {
@@ -42,12 +43,21 @@ const signUp = async (req, res) => {
       });
     }
 
+    //Create temp user profile for User
+    const userProfile = await UserProfile.create({
+      profile_image :`https://api.dicebear.com/5.x/initials/svg?seed=${first_name} ${last_name}`,
+      about:null,
+      dob:null,
+      gender:null
+    })
+
     //Create entry in db
     const user = await User.create({
       first_name,
       last_name,
       email,
       password,
+      userProfile: userProfile._id
     });
 
     //return response
@@ -80,7 +90,7 @@ const login = async (req, res) => {
 
   try {
     //find user from db
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).populate("userProfile");
     if (!user) {
       return res.status(400).json({
         success: false,
@@ -205,6 +215,7 @@ const forgotPassword = async (req, res) => {
     return res.status(200).json({
       success: true,
       msg: `Reset password token has been sent to ${email} successfully`,
+      resetToken
     });
 
   } catch (error) {
@@ -216,13 +227,16 @@ const forgotPassword = async (req, res) => {
   }
 };
 
+
+//=============================================Reset Password==============================================
 const resetPassword = async (req, res) => {
   //get reset token from params
   const { resetToken } = req.params;
-  console.log(resetToken)
+  // console.log(resetToken)
 
   //get new password from body
   let { newPassword } = req.body;
+  console.log(newPassword)
 
 
   //encript reset token to find forgot password token in db because we stored encripted password in db
@@ -245,15 +259,20 @@ const resetPassword = async (req, res) => {
 
   //update new password in user db
   const userEmail = token.email
-  await User.findOneAndUpdate(
-    { email:userEmail },
-    {$set : {password : newPassword}}
-  );
+  
+  const user = await User.findOne({ email: userEmail });
+
+  if (user) {
+    user.password = newPassword;
+    await user.save();
+  }
+  
 
   //send response
   res.status(200).json({
     success: true,
     message: "Password changed successfully!",
+    user
   });
 };
 

@@ -9,11 +9,15 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
       trim: true,
+      minLenght: [3, "Name should be greater than 3 charachers"],
+      maxLenght: [50, "Name should be less than 50 charachers"],
     },
     last_name: {
       type: String,
       required: true,
       trim: true,
+      minLenght: [3, "Name should be greater than 3 charachers"],
+      maxLenght: [50, "Name should be less than 50 charachers"],
     },
     email: {
       type: String,
@@ -21,10 +25,13 @@ const userSchema = mongoose.Schema(
       trim: true,
       lovercase: true,
       unique: true,
+      maxLenght: [50, "Email should be less than 50 charachers"],
     },
     password: {
       type: String,
       required: true,
+      minLenght: [8, "Password should be greater than 5 charachers"],
+      maxLenght: [50, "Password should be less than 50 charachers"],
     },
     role: {
       type: String,
@@ -45,9 +52,9 @@ const userSchema = mongoose.Schema(
         ref: "Exam",
       },
     ],
-    profile: {
+    userProfile: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Profile",
+      ref: "UserProfile",
     },
     examProgress: {
       type: mongoose.Schema.Types.ObjectId,
