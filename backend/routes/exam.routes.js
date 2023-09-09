@@ -2,7 +2,7 @@ import express from "express";
 import { createCategory, deleteCategory, editCategory, showAllCategory } from "../controllers/category.controller.js";
 import { createExam, deleteExam, editExam, showAllExams } from "../controllers/Exam.controller.js";
 import { createAnswer, createOption, createQuestion } from "../controllers/question.controller.js";
-import { createTest } from "../controllers/test.controller.js";
+import { createTest, deleteTest, editTest, showAllTests } from "../controllers/test.controller.js";
 import { auth } from "../middlewares/auth.middleware.js";
 import uploadSingle from "../middlewares/multer.js";
 import { isAdmin, isInstructor } from "../middlewares/role.middleware.js";
@@ -22,8 +22,17 @@ examRoute.get("/all-exams", showAllExams)
 
 //Test Routes
 examRoute.post("/create-test", auth, isInstructor, createTest)
+examRoute.post("/delete-test", auth, isInstructor, deleteTest)
+examRoute.post("/edit-test", auth, isInstructor, editTest)
+examRoute.get("/all-tests", showAllTests)
+
+//Question Routes
 examRoute.post("/create-question", auth, isInstructor, uploadSingle, createQuestion)
+
+//Option Routes
 examRoute.post("/create-option", auth, isInstructor, uploadSingle, createOption)
+
+//Answer Routes
 examRoute.post("/create-answer", auth, isInstructor, uploadSingle, createAnswer)
 
 
