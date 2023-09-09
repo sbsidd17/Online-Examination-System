@@ -17,7 +17,7 @@ const examSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
-  exam_content: [
+  all_tests: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Test",

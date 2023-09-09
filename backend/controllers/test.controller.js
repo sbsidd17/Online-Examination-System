@@ -27,7 +27,7 @@ const createTest = async (req, res) => {
     // push test in exam
     const exam = await Exam.findByIdAndUpdate(
       { _id: exam_id },
-      { $push: { exam_content: test._id } },
+      { $push: { all_tests: test._id } },
       { new: true }
     ).exec();
 
