@@ -1,14 +1,16 @@
 import cloudinary from "../config/cloudinary.js";
 import fs from "fs";
 import Exam from "../models/exam.model.js";
-import Catagory from "../models/catagory.model.js";
+import Category from "../models/category.model.js";
 
+
+//=========================================Create Exam=================================================
 const createExam = async (req, res) => {
   // get data from body
-  let { exam_name, exam_description, price, catagory, thumbnail } = req.body;
+  let { exam_name, exam_description, price, category, thumbnail } = req.body;
 
   // validation
-  if (!exam_name || !exam_description || !price || !catagory) {
+  if (!exam_name || !exam_description || !price || !category) {
     return res.status(401).json({
       success: "false",
       msg: "All Fields Are Required",
@@ -18,7 +20,7 @@ const createExam = async (req, res) => {
   // take thumbnail and upload it to cloudnary
   try {
     const cloudinaryResponse = await cloudinary.uploader.upload(req.file.path, {
-      transformation: [{ width: 320, height: 180, crop: "fill",}],
+      transformation: [{ width: 320, height: 180, crop: "fill" }],
     });
 
     thumbnail = cloudinaryResponse.secure_url;
@@ -43,21 +45,23 @@ const createExam = async (req, res) => {
       exam_name,
       exam_description,
       price,
-      catagory,
+      category,
       thumbnail,
       instructor: req.user.id,
     });
 
-    // Add Exam in catagory exams list
-    const updatedCatagory = await Catagory.findByIdAndUpdate({_id:catagory},
-        {$push : {exams : exam._id}},{new:true}
-        ).exec()
+    // Add Exam in category exams list
+    const updatedCategory = await Category.findByIdAndUpdate(
+      { _id: category },
+      { $push: { exams: exam._id } },
+      { new: true }
+    ).exec();
 
     return res.status(200).json({
       success: "true",
       msg: "Exam Created Successfully",
       exam,
-      updatedCatagory
+      updatedCategory,
     });
   } catch (error) {
     return res.status(500).json({
@@ -68,4 +72,30 @@ const createExam = async (req, res) => {
   }
 };
 
-export { createExam };
+
+//=========================================Edit Exam====================================================
+
+
+//=========================================Show All Exams===============================================
+const showAllExams = async (req, res) => {
+  try {
+    const allExams = await Exam.find({});
+    // return response
+    return res.status(200).json({
+      success: "true",
+      msg: "Got All Exams Successfully",
+      allExams,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: "false",
+      msg: "Something Went Wrong",
+      error: error.message,
+    });
+  }
+};
+
+
+//=============================================Delete Exam===========================================
+
+export { createExam, showAllExams };

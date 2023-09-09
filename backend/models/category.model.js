@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
-const catagorySchema = mongoose.Schema({
-  catagory_name: {
+const categorySchema = mongoose.Schema({
+  category_name: {
     type: String,
   },
-  catagory_description: {
+  category_description: {
     type: String,
   },
   exams: [
@@ -15,5 +15,5 @@ const catagorySchema = mongoose.Schema({
   ],
 });
 
-const Catagory = mongoose.model("Catagory", catagorySchema);
-export default Catagory;
+const Category = mongoose.model("Category", categorySchema);
+export default Category;

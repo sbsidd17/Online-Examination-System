@@ -31,9 +31,9 @@ const examSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  catagory: {
+  category: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Catagory",
+    ref: "Category",
   },
   enrolled_student: [
     {
