@@ -25,7 +25,7 @@ const testSchema = new mongoose.Schema({
       ref: "Question",
     },
   ],
-});
+},{timestamps:true});
 
 const Test = mongoose.model("Test", testSchema);
 export default Test;

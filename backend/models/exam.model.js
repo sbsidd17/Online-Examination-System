@@ -41,7 +41,7 @@ const examSchema = new mongoose.Schema({
       ref: "User",
     },
   ],
-});
+},{timestamps:true});
 
 const Exam = mongoose.model("exam", examSchema);
 export default Exam;

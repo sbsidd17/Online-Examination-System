@@ -8,7 +8,7 @@ const optionSchema = new mongoose.Schema({
     option_image: {
         type: String,
     },
-})
+},{timestamps:true})
 
 const Option = mongoose.model("option", optionSchema);
 export default Option;

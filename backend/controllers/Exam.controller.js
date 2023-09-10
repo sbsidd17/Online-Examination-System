@@ -81,8 +81,8 @@ const editExam = async (req, res) => {
   let { exam_name, exam_description, price, category, thumbnail, exam_id } =
     req.body;
 
-  const exam = await Exam.findById({_id:exam_id});
-  if(!exam){
+  const exam = await Exam.findById({ _id: exam_id });
+  if (!exam) {
     return res.status(401).json({
       success: "false",
       msg: "Exam Not Found With This Id",
@@ -181,7 +181,7 @@ const deleteExam = async (req, res) => {
     // if exam deleted, all tests, questions, options and anwers related to this exam will also be deleted
     const exam = await Exam.findById({ _id: exam_id });
 
-    if(!exam){
+    if (!exam) {
       return res.status(401).json({
         success: "false",
         msg: "Exam Not Found",
@@ -202,10 +202,14 @@ const deleteExam = async (req, res) => {
             const allOptions = question.options;
             for (const optionId of allOptions) {
               // delete All Options
-              await Option.findByIdAndDelete({ _id: optionId });
+              if (optionId) {
+                await Option.findByIdAndDelete({ _id: optionId });
+              }
             }
             const answerId = question.answer;
-            await Answer.findByIdAndDelete({ _id: answerId });
+            if (answerId) {
+              await Answer.findByIdAndDelete({ _id: answerId });
+            }
           }
           await Question.findByIdAndDelete({ _id: questionId });
         }
@@ -213,14 +217,13 @@ const deleteExam = async (req, res) => {
       await Test.findByIdAndDelete({ _id: testId });
     }
 
-     //delete exam from catagory
-     await Category.findByIdAndUpdate({_id: category_id},
-      {$pull : {exams : exam_id}}
-      )
+    //delete exam from catagory
+    await Category.findByIdAndUpdate(
+      { _id: category_id },
+      { $pull: { exams: exam_id } }
+    );
 
     await Exam.findByIdAndDelete({ _id: exam_id });
-
-   
 
     // return response
     return res.status(200).json({

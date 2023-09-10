@@ -16,7 +16,7 @@ const profileSchema = new mongoose.Schema({
         type:String
     }
     
-})
+},{timestamps:true})
 
 const UserProfile = mongoose.model("UserProfile", profileSchema)
 export default UserProfile;
