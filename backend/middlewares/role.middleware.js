@@ -22,6 +22,18 @@ const isInstructor = (req, res, next) => {
   next();
 };
 
+const isApproved = (req, res, next) => {
+  const isApproved = req.user.isApproved;
+
+  if (!isApproved) {
+    return res.status(401).json({
+      success: "false",
+      msg: "You Approval Is In Pending. Please Wait Or Contact Admin",
+    });
+  }
+  next();
+};
+
 const isAdmin = (req, res, next) => {
   const role = req.user.role;
 
@@ -34,4 +46,4 @@ const isAdmin = (req, res, next) => {
   next();
 };
 
-export { isStudent, isInstructor, isAdmin };
+export { isStudent, isInstructor, isApproved, isAdmin };
