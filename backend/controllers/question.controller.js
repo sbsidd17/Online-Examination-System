@@ -210,6 +210,28 @@ const deleteQuestion = async (req, res) => {
   }
 };
 
+//=======================================Get Question Data===============================================
+const getQuestionData = async (req, res) => {
+  const { questionId } = req.params;
+  try {
+    const questionData = await Question.findById({ _id: questionId })
+    .populate(["options", "answer"])
+    ;
+    // return response
+    return res.status(200).json({
+      success: "true",
+      msg: "Got Data Successfully",
+      questionData,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: "false",
+      msg: "Something Went Wrong",
+      error: error.message,
+    });
+  }
+};
+
 //=====================================Create Option======================================================
 const createOption = async (req, res) => {
   //get data
@@ -570,6 +592,7 @@ export {
   createQuestion,
   editQuestion,
   deleteQuestion,
+  getQuestionData,
   createOption,
   editOption,
   deleteOption,

@@ -18,5 +18,5 @@ const forgotPasswordTokenSchema = new mongoose.Schema({
   },
 });
 
-const ForgotPasswordToken = mongoose.model("forgotPasswordToken", forgotPasswordTokenSchema);
+const ForgotPasswordToken = mongoose.model("ForgotPasswordToken", forgotPasswordTokenSchema);
 export default ForgotPasswordToken;

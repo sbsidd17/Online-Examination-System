@@ -43,5 +43,5 @@ const examSchema = new mongoose.Schema({
   ],
 },{timestamps:true});
 
-const Exam = mongoose.model("exam", examSchema);
+const Exam = mongoose.model("Exam", examSchema);
 export default Exam;

@@ -111,7 +111,7 @@ const editTest = async (req, res) => {
 //===============================================Show All Test================================================
 const showAllTests = async (req, res) => {
   try {
-    const allTests = await Test.find({});
+    const allTests = await Test.find({}).select("-questions");
     // return response
     return res.status(200).json({
       success: "true",
@@ -149,13 +149,13 @@ const deleteTest = async (req, res) => {
         const allOptions = question.options;
         for (const optionId of allOptions) {
           // delete All Options
-          if(optionId){
+          if (optionId) {
             await Option.findByIdAndDelete({ _id: optionId });
           }
         }
         const answerId = question.answer;
         // delete all answer
-        if(answerId){
+        if (answerId) {
           await Answer.findByIdAndDelete({ _id: answerId });
         }
       }
@@ -177,4 +177,30 @@ const deleteTest = async (req, res) => {
     });
   }
 };
-export { createTest, editTest, showAllTests, deleteTest };
+
+const getTestData = async (req, res) => {
+  const { testId } = req.params;
+  try {
+    const testData = await Test.findById({ _id: testId })
+    .populate({
+      path: "questions",
+      populate:{
+        path: "options answer"
+      }
+    })
+    ;
+    // return response
+    return res.status(200).json({
+      success: "true",
+      msg: "Got Data Successfully",
+      testData,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: "false",
+      msg: "Something Went Wrong",
+      error: error.message,
+    });
+  }
+};
+export { createTest, editTest, showAllTests, deleteTest, getTestData };

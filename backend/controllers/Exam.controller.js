@@ -6,6 +6,7 @@ import Test from "../models/test.model.js";
 import Question from "../models/question.model.js";
 import Option from "../models/option.model.js";
 import Answer from "../models/answer.model.js";
+import User from "../models/user.model.js";
 
 //=========================================Create Exam=================================================
 const createExam = async (req, res) => {
@@ -156,7 +157,14 @@ const editExam = async (req, res) => {
 //=========================================Show All Exams===============================================
 const showAllExams = async (req, res) => {
   try {
-    const allExams = await Exam.find({});
+    const allExams = await Exam.find({}).populate({
+      path: "instructor",
+      select: ["first_name", "last_name"],
+      populate: {
+        path : "userProfile",
+        select: "profile_image"
+      }
+    });
     // return response
     return res.status(200).json({
       success: "true",
@@ -239,4 +247,5 @@ const deleteExam = async (req, res) => {
   }
 };
 
-export { createExam, showAllExams, editExam, deleteExam };
+
+export { createExam, showAllExams, editExam, deleteExam};
