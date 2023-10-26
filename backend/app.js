@@ -4,11 +4,16 @@ import userRoute from "./routes/user.routes.js";
 import cookieParser from "cookie-parser";
 import examRoute from "./routes/exam.routes.js";
 import adminRoute from "./routes/admin.routes.js";
+import cors from "cors"
 
 const app = express()
+
 app.use(express.json())
 app.use(cookieParser())
-
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials:true
+  }));
 app.get("/",(req,res)=>{
     res.send("Backend Is Running...")
 })

@@ -1,4 +1,3 @@
-import React from "react";
 import { Link, NavLink, Outlet} from "react-router-dom";
 import HomeDataCard from "../components/HomeDataCard";
 import ImageSlideShow from "../components/ImageSlideShow";
@@ -6,6 +5,7 @@ import {FcAdvance, FcApproval, FcComboChart, FcDocument, FcFaq, FcGraduationCap,
 import explorePass from "../assets/svg/explore-pass.svg"
 import PassCard from "../components/PassCard";
 import ExamCard2 from "../components/ExamCard2";
+import Footer from "../components/Footer";
 
 
 function Home() {
@@ -16,17 +16,17 @@ function Home() {
         <ImageSlideShow />
       </div>
 
-      <div className="w-full px-[8rem] flex flex-col gap-20">
+      <div className="w-full lg:px-[8rem] flex flex-col gap-20">
         {/* section */}
         <div className="w-full flex flex-col mt-20 justify-center items-center gap-10 ">
-          <div className="text-slate-800 text-3xl">
+          <div className="text-slate-800 lg:text-3xl md:text-2xl">
             One Destination for{" "}
-            <span className="text-slate-900 text-3xl font-bold">
+            <span className="text-slate-900 lg:text-3xl md:text-2xl font-bold">
               {" "}
               Complete Exam Preparation
             </span>
           </div>
-          <div className="flex justify-center items-center gap-5">
+          <div className="flex justify-center items-center lg:gap-5 md:gap-3 sm:gap-2">
             <span>Learn</span><FcAdvance /><span>Practice</span><FcAdvance /><span>Improve</span><FcAdvance /><span>Success</span>
           </div>
           <div>
@@ -54,7 +54,7 @@ function Home() {
         <div className="w-full flex flex-col gap-5">
             <div className="text-2xl font-semibold">Popular Exams</div>
             {/* categories */}
-            <div className="flex items-center gap-5 rounded-md bg-white p-5 shadow-sm">
+            <div className="flex items-center gap-5 rounded-md bg-white p-5 shadow-sm overflow-x-auto">
                 <NavLink to={"/category/23223"} className={({isActive})=>(isActive ? "bg-[#0ad0f4] text-white rounded-3xl " : "text-slate-500 border-slate-500 border-[1px] rounded-3xl hover:text-[#0ad0f4] hover:border-[#0ad0f4]")}><button className=" flex justify-center items-center px-5 py-2 ">SSC Exams</button></NavLink>
                 <NavLink to={"/category/23255"} className={({isActive})=>(isActive ? "bg-[#0ad0f4] text-white rounded-3xl " : "text-slate-500 border-slate-500 border-[1px] rounded-3xl hover:text-[#0ad0f4] hover:border-[#0ad0f4]")}><button className=" flex justify-center items-center px-5 py-2 ">Railway Exams</button></NavLink>
                 <NavLink to={"/category/23288"} className={({isActive})=>(isActive ? "bg-[#0ad0f4] text-white rounded-3xl " : "text-slate-500 border-slate-500 border-[1px] rounded-3xl hover:text-[#0ad0f4] hover:border-[#0ad0f4]")}><button className=" flex justify-center items-center px-5 py-2 ">Coading Exams</button></NavLink>
@@ -63,17 +63,17 @@ function Home() {
         </div>
 
         {/* section */}
-        <div className="flex w-full">
+        <div className="flex flex-col items-center w-full lg:flex-row ">
           {/* left */}
-          <div className="flex p-5 w-1/2">
+          <div className="flex p-5 w-11/12 lg:w-1/2">
             <img src={explorePass} alt="" />
           </div>
           {/* right */}
-          <div className="flex flex-col w-1/2 gap-10">
-            <div className="text-xl font-semibold">Enroll in Test Series for 670+ exams with</div>
-            <div className="text-3xl font-semibold">GyanBook <span className="text-[#0ad0f4] text-4xl">Pass</span></div>
-            <div>Get unlimited access to the most relevant Mock Tests, on India's Structured Online Test series platform</div>
-            <div className="font-semibold">What you get with GyanBook Pass</div>
+          <div className="flex flex-col w-11/12 lg:w-1/2 gap-10">
+            <div className="text-sm lg:text-xl font-semibold">Enroll in Test Series for 670+ exams with</div>
+            <div className="text-xl lg:text-3xl font-semibold">GyanBook <span className="text-[#0ad0f4] text-2xl lg:text-4xl">Pass</span></div>
+            <div className="text-sm lg:text-xl">Get unlimited access to the most relevant Mock Tests, on India's Structured Online Test series platform</div>
+            <div className="text-sm lg:text-xl font-semibold">What you get with GyanBook Pass</div>
             <div className="flex flex-wrap">
               <PassCard icon={<FcComboChart size={48}/>} name={"In-depth Performance Analysis"} />
               <PassCard icon={<FcIdea size={48}/>} name={"All India Rank"} />
@@ -89,7 +89,7 @@ function Home() {
         {/* section */}
         <div className="w-full flex flex-col gap-10">
           <div className="text-2xl font-semibold">Popular Exams</div>
-          <div className="flex flex-wrap gap-10">
+          <div className="flex items-center flex-wrap gap-10">
             <ExamCard2 
             image="https://wpassets.adda247.com/wp-content/uploads/multisite/sites/2/2023/01/09112542/Delhi-Police-Constable-01-1.png"
             name={"SSC Delhi Police"} 
@@ -135,6 +135,7 @@ function Home() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

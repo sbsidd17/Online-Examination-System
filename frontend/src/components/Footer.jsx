@@ -5,12 +5,11 @@ import { FaFacebookF, FaGithub, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 function Footer() {
   return (
     // footer with 3 colums and 2 rows
-    <div className="bg-gray-800 relative left-0 bottom-0 w-full flex flex-col p-20 mt-20">
-
+    <div className="bg-gray-800 relative left-0 bottom-0 w-full flex flex-col p-5 lg:p-20 mt-20 gap-3">
       {/* row 1 */}
-      <div className=" w-full flex justify-between">
+      <div className=" w-full flex justify-between flex-wrap gap-5">
         {/* column 1 */}
-        <div className="flex flex-col justify-between gap-5">
+        <div className="flex flex-col justify-between gap-2 lg:gap-5">
           <div className="flex justify-between">
             <img src={GyanBookLogoWhite} alt="logo" className="w-[250px]" />
           </div>
@@ -38,17 +37,17 @@ function Footer() {
         <div className="flex flex-col gap-10 items-center">
           <p className="text-white font-semibold">Follow Us On</p>
           <div className="flex gap-5">
-            <FaFacebookF size={28} className="text-gray-400" />
-            <FaTwitter size={28} className="text-gray-400" />
-            <FaLinkedinIn size={28} className="text-gray-400" />
-            <FaGithub size={28} className="text-gray-400" />
+            <FaFacebookF size={22} className="text-gray-400" />
+            <FaTwitter size={22} className="text-gray-400" />
+            <FaLinkedinIn size={22} className="text-gray-400" />
+            <FaGithub size={22} className="text-gray-400" />
           </div>
         </div>
       </div>
       {/* row 2 */}
       <hr className="text-gray-400 mt-10" />
-      <div className="flex justify-center items-center text-gray-400 font-semibold m-5">
-      Copyright © 2023-24 SdEducation Pvt. Ltd. All rights reserved
+      <div className="text-sm flex justify-center items-center text-gray-400 font-semibold m-5">
+        Copyright © 2023-24 SdEducation Pvt. Ltd. All rights reserved
       </div>
     </div>
   );

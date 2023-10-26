@@ -7,7 +7,7 @@ function Category() {
     console.log(id)
   return (
     <>
-      <div className="flex justify-between items-center flex-wrap gap-5">
+      <div className="flex justify-center lg:justify-between items-center flex-wrap gap-5">
                 <ExamCard name="SSC CGL" url="https://www.igecorner.com/wp-content/uploads/2019/03/ssc-logo.png" />
                 <ExamCard name="SSC CGL" url="https://www.igecorner.com/wp-content/uploads/2019/03/ssc-logo.png" />
                 <ExamCard name="SSC CGL" url="https://www.igecorner.com/wp-content/uploads/2019/03/ssc-logo.png" />

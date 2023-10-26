@@ -1,21 +1,15 @@
-import React from 'react'
-
-import "./App.css"
+import "./App.css";
 import "./index.css";
-import Navigation from './components/Navigation'
-import UserRoutes from './routes/UserRoutes'
-import Footer from './components/Footer';
+import UserRoutes from "./routes/UserRoutes";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <>
-    <Navigation />
-    <UserRoutes />
-    <Footer />
+      <Navbar/>
+      <UserRoutes />
     </>
-  )
+  );
 }
 
-export default App
-
-
+export default App;

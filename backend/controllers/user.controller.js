@@ -9,7 +9,8 @@ import UserProfile from "../models/userProfile.model.js";
 //=================================SignUp================================================
 const signUp = async (req, res) => {
   // take data from body
-  const { first_name, last_name, email, password, userOtp } = req.body;
+  const { first_name, last_name, email, password, userOtp, role } = req.body;
+  console.log(req.body)
 
   //validation
   if (!first_name || !last_name || !email || !password || !userOtp) {
@@ -52,11 +53,13 @@ const signUp = async (req, res) => {
     })
 
     //Create entry in db
+
     const user = await User.create({
       first_name,
       last_name,
       email,
       password,
+      role,
       userProfile: userProfile._id
     });
 
@@ -67,6 +70,7 @@ const signUp = async (req, res) => {
       user,
     });
   } catch (error) {
+    console.log(error.message)
     return res.status(500).json({
       success: false,
       msg: "Something Went Wrong",

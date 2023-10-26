@@ -33,7 +33,7 @@ function Navigation() {
   return (
     <>
     {/* navigation */}
-      <div className="flex justify-between items-center bg-white text-slate-500 p-3 fixed top-0 left-0 h-[70px] w-[100vw] z-50 border-b-2">
+      <div className="flex justify-between items-center bg-white text-slate-500 p-3 relative top-0 left-0 h-[70px] w-full z-50 border-b-2">
         {/* left */}
         <div className="flex justify-center items-center gap-5 ">
             <Link to={"/"}>
@@ -48,7 +48,7 @@ function Navigation() {
             </div>
         </div>
         {/* right */}
-        <Link to={"/login"}>
+        <Link to={"/signup"}>
             <button className='bg-green-400 px-5 py-2 text-white rounded-md hover:bg-green-500'>Get Started</button>
         </Link>
       </div>

@@ -9,7 +9,8 @@ const ImageSlideShow = () => {
   ];
 
   return (
-    <Slide>
+    <div>
+      <Slide>
       <div className="each-slide-effect">
         <div style={{ backgroundImage: `url(${images[0]})` }}></div>
       </div>
@@ -20,6 +21,7 @@ const ImageSlideShow = () => {
         <div style={{ backgroundImage: `url(${images[2]})` }}></div>
       </div>
     </Slide>
+    </div>
   );
 };
 
