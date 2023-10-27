@@ -27,14 +27,14 @@ function Login() {
       return;
     }
     const response = await dispatch(login(formData));
-    console.log(response.payload.user)
-    localStorage.setItem("isLoggedIn", true);
-    localStorage.setItem("role", response.payload.user.role)
-    localStorage.setItem("data", JSON.stringify(response.payload.user))
-    navigate("/")
+    // console.log(response.type)
+    if(response.type === "/auth/login/fulfilled"){
+      navigate("/")
+    }
+    
   }
   return (
-    <div className="mt-[70px] w-full h-[calc(100vh-70px)] flex-wrap">
+    <div className="mt-[70px] w-full h-[calc(100vh-70px)]">
       {/* main div */}
       <div className="flex w-full h-full">
         {/* left div */}
@@ -85,7 +85,7 @@ function Login() {
                 </label>
               </div>
               <div className="text-white">
-                <Link>Forgot Password</Link>
+                <Link to={"/forgot-password"}>Forgot Password</Link>
               </div>
             </div>
 

@@ -208,7 +208,7 @@ const forgotPassword = async (req, res) => {
     });
 
     //generate reset link
-    const resetPasswordUrl = `${process.env.BACKEND_URL}/api/v1/auth/reset-password?token=${resetToken}`;
+    const resetPasswordUrl = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
 
     //send email 
     const subject = "Reset Password";
@@ -234,13 +234,9 @@ const forgotPassword = async (req, res) => {
 
 //=============================================Reset Password==============================================
 const resetPassword = async (req, res) => {
-  //get reset token from params
-  const { resetToken } = req.params;
-  // console.log(resetToken)
-
-  //get new password from body
-  let { newPassword } = req.body;
-  console.log(newPassword)
+  //get new password and resetToken from body
+  let { newPassword, resetToken } = req.body;
+  // console.log(newPassword)
 
 
   //encript reset token to find forgot password token in db because we stored encripted password in db
@@ -275,7 +271,7 @@ const resetPassword = async (req, res) => {
   //send response
   res.status(200).json({
     success: true,
-    message: "Password changed successfully!",
+    msg: "Password changed successfully!",
     user
   });
 };
