@@ -20,9 +20,9 @@ function ForgotPassword() {
       <div className="flex w-full h-full">
         {/* left */}
         <div className="hidden md:flex justify-center items-center relative w-1/2 h-full">
-          <div className="bg-[#0ad0f4] w-3/5 h-full"></div>
+          <div className="bg-[#0ad0f4] w-2/3 h-full"></div>
           <img
-            className="z-10 fixed top-40 left-5 w-[550px] h-[400px]"
+            className="z-10 absolute top-10 left-5 w-11/12 h-11/12"
             src={ForgotPasswordImage}
             alt=""
           />

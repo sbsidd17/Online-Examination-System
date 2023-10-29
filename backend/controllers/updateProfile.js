@@ -40,7 +40,7 @@ const updateProfile = async (req, res) => {
         last_name,
       },
       {
-        new:true
+        new: true,
       }
     ).exec();
 
@@ -54,15 +54,19 @@ const updateProfile = async (req, res) => {
         gender,
       },
       {
-        new:true
+        new: true,
       }
     ).exec();
+
+    const updatedUser = await User.findById({ _id: id }).populate(
+      "userProfile exams"
+    );
 
     //send response
     res.status(200).json({
       success: true,
       msg: "Profile Updated Successfully",
-      user,
+      user: updatedUser,
       userProfile,
     });
   } catch (error) {

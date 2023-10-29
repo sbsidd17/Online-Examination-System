@@ -104,6 +104,26 @@ export const resetPassword = createAsyncThunk("/auth/reset-password", async (dat
     }
   });
 
+  //update profile
+  export const updateProfile = createAsyncThunk("/auth/update-profile", async (data) => {
+    try {
+      const res = axiosInstance.post("/auth/update-profile", data);
+  
+      toast.promise(res, {
+        loading: "Updating Profile...",
+        success: (data) => {
+          return data?.data?.msg;
+        },
+        error: "Failed to Update",
+      });
+      return (await res).data;
+    } catch (error) {
+      // console.log(error.response)
+      toast.error(error?.response?.data?.msg);
+      throw error;
+    }
+  });
+
 const authSlice = createSlice({
   name: "userData",
   initialState,
@@ -123,7 +143,11 @@ const authSlice = createSlice({
         state.data = {};
         state.isLoggedIn = false;
         state.role = "";
-      });
+      })
+      .addCase(updateProfile.fulfilled, (state, action) => {
+        localStorage.setItem("data", JSON.stringify(action?.payload?.user));
+        state.data = action?.payload?.user;
+      })
   },
 });
 

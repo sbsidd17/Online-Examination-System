@@ -16,11 +16,7 @@ module.exports = {
       },
     },
   },
-  // plugins: [
-  //   require("@tailwindcss/typography"),
-  //   require("@tailwindcss/forms"),
-  //   require("@tailwindcss/line-clamp"),
-  //   require("tailwind-children"),
-  //   require("tailwind-saasblocks"),
-  // ],
+  plugins: [
+    require("rippleui")
+  ],
 };

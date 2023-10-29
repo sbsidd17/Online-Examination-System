@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import SignupImage from "../assets/images/SignupImage2.png";
+import SignupImage from "../assets/images/SignupImage.png";
 import { FaUserAlt } from "react-icons/fa";
 import { GrMail } from "react-icons/gr";
 import { RiLockPasswordFill } from "react-icons/ri";
@@ -47,13 +47,13 @@ function Signup() {
       toast.error("Password and Confirm Password Should Be Same");
       return;
     }
-    
-    const sendingToast = toast.loading("Sending OTP...")
+
+    const sendingToast = toast.loading("Sending OTP...");
     const res = await axiosInstance.post("/auth/sendOtp", {
       email: formData.email,
     });
     toast.dismiss(sendingToast);
-    toast.success(res.data.msg)
+    toast.success(res.data.msg);
     setIsOpen(true);
     // console.log(formData);
   }
@@ -68,132 +68,140 @@ function Signup() {
   }
 
   return (
-    <div className="mt-[70px] h-[calc(100vh-70px)] flex justify-center lg:justify-between items-center">
+    <div className="mt-[70px] h-[calc(100vh-70px)] w-full flex">
       {/* left */}
-      <div className="bg-[#0ad0f4] pl-[12rem] flex-1">
-        <img className="h-full" src={SignupImage} alt="image" />
+      <div className="hidden md:flex w-1/2 h-full relative">
+        <div className="w-1/2 h-full bg-[#0ad0f4]"></div>
+        <div className="w-1/2"></div>
+        <img
+          className="absolute top-0 left-[20%] z-10 w-1/2 h-full"
+          src={SignupImage}
+          alt="image"
+        />
       </div>
       {/* right */}
-      <form className="flex flex-col gap-10 justify-between lg:pr-[10rem] p-2 flex-1">
-        <p className="font-bold text-[#0ad0f4] text-3xl">Create Account</p>
+      <div className="flex h-full w-full md:w-1/2 p-10 md:p-5 justify-start items-center">
+        <form className="flex flex-col gap-5 justify-between">
+          <p className="font-bold text-[#0ad0f4] text-3xl">Create Account</p>
 
-        {/* name */}
-        <div className="flex gap-5">
-          <div className="flex gap-2 items-center border border-gray-400 rounded-md p-2">
-            <FaUserAlt />
-            <input
-              onChange={onChangeHandler}
-              name="first_name"
-              required
-              className="border-none bg-transparent focus:outline-none"
-              type="text"
-              placeholder="First Name"
-              value={formData.first_name}
-            />
-          </div>
-          <div className="flex gap-2 items-center border border-gray-400 rounded-md p-2">
-            <FaUserAlt />
-            <input
-              onChange={onChangeHandler}
-              name="last_name"
-              required
-              className="border-none bg-transparent focus:outline-none"
-              type="text"
-              placeholder="Last Name"
-              value={formData.last_name}
-            />
-          </div>
-        </div>
-
-        {/* email */}
-        <div className="flex gap-2 items-center border border-gray-400 rounded-md p-2">
-          <GrMail />
-          <input
-            onChange={onChangeHandler}
-            name="email"
-            required
-            className="border-none bg-transparent focus:outline-none"
-            type="email"
-            placeholder="Email"
-            value={formData.email}
-          />
-        </div>
-
-        {/* password */}
-        <div className="flex gap-5">
-          <div className="flex gap-5">
-            <div className="flex gap-2 items-center border border-gray-400 rounded-md p-2">
-              <RiLockPasswordFill />
+          {/* name */}
+          <div className="flex gap-5 w-full">
+            <div className="flex gap-2 items-center border border-gray-400 rounded-md p-2 w-1/2">
+              <FaUserAlt />
               <input
                 onChange={onChangeHandler}
-                name="password"
+                name="first_name"
                 required
-                className="border-none bg-transparent focus:outline-none"
-                type="password"
-                placeholder="Password"
-                value={formData.password}
+                className="border-none bg-transparent focus:outline-none w-full"
+                type="text"
+                placeholder="First Name"
+                value={formData.first_name}
               />
             </div>
-            <div className="flex gap-2 items-center border border-gray-400 rounded-md p-2">
-              <RiLockPasswordFill />
+            <div className="flex gap-2 items-center border border-gray-400 rounded-md p-2 w-1/2">
+              <FaUserAlt />
               <input
                 onChange={onChangeHandler}
-                name="confirm_password"
+                name="last_name"
                 required
-                className="border-none bg-transparent focus:outline-none"
-                type="password"
-                placeholder="Confirm Password"
-                value={formData.confirm_password}
+                className="border-none bg-transparent focus:outline-none w-full"
+                type="text"
+                placeholder="Last Name"
+                value={formData.last_name}
               />
             </div>
           </div>
-        </div>
 
-        {/* role */}
-        <div className="flex gap-10">
-          <div className="flex justify-center items-center gap-2">
+          {/* email */}
+          <div className="flex gap-2 items-center border border-gray-400 rounded-md p-2 w-full">
+            <GrMail />
             <input
               onChange={onChangeHandler}
+              name="email"
               required
-              type="radio"
-              name="role"
-              className="radio radio-info"
-              id="Student"
-              value="Student"
-              defaultChecked
+              className="border-none bg-transparent focus:outline-none w-full"
+              type="email"
+              placeholder="Email"
+              value={formData.email}
             />
-            <label htmlFor="student">Student</label>
           </div>
-          <div className="flex justify-center items-center gap-2">
-            <input
-              onChange={onChangeHandler}
-              required
-              type="radio"
-              name="role"
-              className="radio radio-info"
-              id="Instructor"
-              value="Instructor"
-            />
-            <label htmlFor="instructor">Instructor</label>
-          </div>
-        </div>
 
-        {/* create account */}
-        <div className="flex flex-col">
-          <button
-            className="bg-[#0ad0f4] text-white text-xl font-bold rounded-md py-2 hover:bg-[#07bcdc]"
-            onClick={createAccountHandler}
-          >
-            Create Account
-          </button>
-          <p className="text-center">
-            Already Have Account?{" "}
-            <Link className="text-blue-600" to={"/login"}>
-              Login
-            </Link>
-          </p>
-        </div>
-      </form>
+          {/* password */}
+          <div className="flex gap-5 w-full">
+            <div className="flex gap-5 w-full">
+              <div className="flex gap-2 items-center border border-gray-400 rounded-md p-2 w-1/2">
+                <RiLockPasswordFill />
+                <input
+                  onChange={onChangeHandler}
+                  name="password"
+                  required
+                  className="border-none bg-transparent focus:outline-none w-full"
+                  type="password"
+                  placeholder="Password"
+                  value={formData.password}
+                />
+              </div>
+              <div className="flex gap-2 items-center border border-gray-400 rounded-md p-2 w-1/2">
+                <RiLockPasswordFill />
+                <input
+                  onChange={onChangeHandler}
+                  name="confirm_password"
+                  required
+                  className="border-none bg-transparent focus:outline-none w-full"
+                  type="password"
+                  placeholder="Confirm Password"
+                  value={formData.confirm_password}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* role */}
+          <div className="flex gap-10">
+            <div className="flex justify-center items-center gap-2">
+              <input
+                onChange={onChangeHandler}
+                required
+                type="radio"
+                name="role"
+                className="radio radio-info"
+                id="Student"
+                value="Student"
+                defaultChecked
+              />
+              <label htmlFor="student">Student</label>
+            </div>
+            <div className="flex justify-center items-center gap-2">
+              <input
+                onChange={onChangeHandler}
+                required
+                type="radio"
+                name="role"
+                className="radio radio-info"
+                id="Instructor"
+                value="Instructor"
+              />
+              <label htmlFor="instructor">Instructor</label>
+            </div>
+          </div>
+
+          {/* create account */}
+          <div className="flex flex-col">
+            <button
+              className="bg-[#0ad0f4] text-white text-xl font-bold rounded-md py-2 hover:bg-[#07bcdc]"
+              onClick={createAccountHandler}
+            >
+              Create Account
+            </button>
+            <p className="text-center">
+              Already Have Account?{" "}
+              <Link className="text-blue-600" to={"/login"}>
+                Login
+              </Link>
+            </p>
+          </div>
+        </form>
+      </div>
 
       {/* otp modal */}
       {isOpen && (

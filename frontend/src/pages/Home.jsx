@@ -6,11 +6,16 @@ import explorePass from "../assets/svg/explore-pass.svg"
 import PassCard from "../components/PassCard";
 import ExamCard2 from "../components/ExamCard2";
 import Footer from "../components/Footer";
+import { useSelector } from "react-redux";
+
 
 
 function Home() {
+
+  const {isLoggedIn} = useSelector((state)=>state.auth)
+  // console.log(isLoggedIn)
   return (
-    <div className="mt-[70px] flex flex-col bg-[#fbfcfc]">
+    <div className="mt-[70px] w-full float-right flex flex-col bg-[#fbfcfc]">
       {/* Image Slide Show */}
       <div>
         <ImageSlideShow />
@@ -30,11 +35,19 @@ function Home() {
             <span>Learn</span><FcAdvance /><span>Practice</span><FcAdvance /><span>Improve</span><FcAdvance /><span>Success</span>
           </div>
           <div>
-            <Link to={"/login"}>
+            {
+            isLoggedIn === true ?
+            (<Link to={"/profile"}>
+              <button className="bg-green-400 px-5 py-2 text-white rounded-md hover:bg-green-500">
+                Profile
+              </button>
+            </Link>)
+            :
+            (<Link to={"/login"}>
               <button className="bg-green-400 px-5 py-2 text-white rounded-md hover:bg-green-500">
                 Get Started Now
               </button>
-            </Link>
+            </Link>)}
           </div>
         </div>
 

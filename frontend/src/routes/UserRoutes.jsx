@@ -3,6 +3,7 @@ import Category from "../components/Category";
 import ForgotPassword from "../pages/ForgotPassword";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
+import Profile from "../pages/Profile";
 import ResetPassword from "../pages/ResetPassword";
 import Signup from "../pages/Signup";
 
@@ -16,6 +17,7 @@ function UserRoutes() {
       <Route path="/login" element={<Login />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   );
 }

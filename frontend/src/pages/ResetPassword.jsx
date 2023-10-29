@@ -39,12 +39,14 @@ function ResetPassword() {
       {/* main div */}
       <div className="flex w-full h-full">
         {/* left div */}
-        <div className="md:flex justify-center w-1/2 hidden h-full">
-          <img src={RestetPasswordImage} alt="" />
+        <div className="md:flex justify-center w-[40%] hidden h-full relative">
+          <img src={RestetPasswordImage} alt="" 
+          className="absolute top-0 left-[30%] w-full h-full"
+          />
         </div>
 
         {/* right div */}
-        <div className="flex flex-col gap-7 w-full md:w-1/2 h-full justify-center items-center bg-[#0ad0f4]">
+        <div className="flex flex-col gap-7 w-full md:w-[60%] h-full justify-center items-center bg-[#0ad0f4] p-5 md:p-30">
           {/* heading */}
           <div className="text-3xl text-white font-bold">Reset Password?</div>
 

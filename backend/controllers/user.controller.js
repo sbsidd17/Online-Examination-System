@@ -47,7 +47,7 @@ const signUp = async (req, res) => {
     //Create temp user profile for User
     const userProfile = await UserProfile.create({
       profile_image :`https://api.dicebear.com/5.x/initials/svg?seed=${first_name} ${last_name}`,
-      about:null,
+      about:"",
       dob:null,
       gender:null
     })
