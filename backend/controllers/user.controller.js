@@ -94,7 +94,7 @@ const login = async (req, res) => {
 
   try {
     //find user from db
-    const user = await User.findOne({ email }).populate("userProfile");
+    const user = await User.findOne({ email }).populate("userProfile exams");
     if (!user) {
       return res.status(400).json({
         success: false,
