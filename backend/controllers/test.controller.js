@@ -179,9 +179,9 @@ const deleteTest = async (req, res) => {
 };
 
 const getTestData = async (req, res) => {
-  const { testId } = req.params;
+  const { id } = req.params;
   try {
-    const testData = await Test.findById({ _id: testId })
+    const testData = await Test.findById({ _id: id })
     .populate({
       path: "questions",
       populate:{

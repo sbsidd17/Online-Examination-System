@@ -37,12 +37,31 @@ const createCategory = async (req, res) => {
 
 const showAllCategory = async (req, res) => {
   try {
-    const allCategory = await Category.find({});
+    const allCategory = await Category.find({}).populate("exams");
     // return response
     return res.status(200).json({
       success: "true",
       msg: "Got all Categories Successfully",
       allCategory,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: "false",
+      msg: "Something Went Wrong",
+      error: error.message,
+    });
+  }
+};
+
+const getCategory = async (req, res) => {
+  const {id} = req.params
+  try {
+    const category = await Category.findById({_id:id}).populate("exams");
+    // return response
+    return res.status(200).json({
+      success: "true",
+      msg: "Got Category Successfully",
+      category,
     });
   } catch (error) {
     return res.status(500).json({
@@ -98,4 +117,4 @@ const deleteCategory = async (req, res) => {
   }
 };
 
-export { createCategory, showAllCategory, editCategory, deleteCategory };
+export { createCategory, showAllCategory, getCategory, editCategory, deleteCategory };

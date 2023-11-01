@@ -154,6 +154,27 @@ const editExam = async (req, res) => {
   }
 };
 
+//=========================================Get exam data by Id====================================================
+const getExamData = async (req, res) => {
+  const { exam_id } = req.params;
+  try {
+    const examData = await Exam.findById({ _id: exam_id }).populate("all_tests instructor");
+
+    // return response
+    return res.status(200).json({
+      success: "true",
+      msg: "Got Data Successfully",
+      examData,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: "false",
+      msg: "Something Went Wrong",
+      error: error.message,
+    });
+  }
+};
+
 //=========================================Show All Exams===============================================
 const showAllExams = async (req, res) => {
   try {
@@ -161,9 +182,9 @@ const showAllExams = async (req, res) => {
       path: "instructor",
       select: ["first_name", "last_name"],
       populate: {
-        path : "userProfile",
-        select: "profile_image"
-      }
+        path: "userProfile",
+        select: "profile_image",
+      },
     });
     // return response
     return res.status(200).json({
@@ -247,5 +268,4 @@ const deleteExam = async (req, res) => {
   }
 };
 
-
-export { createExam, showAllExams, editExam, deleteExam};
+export { createExam, showAllExams, getExamData, editExam, deleteExam };

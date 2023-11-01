@@ -14,7 +14,6 @@ export default function Navbar() {
   const { isLoggedIn, data, role } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate()
-  console.log(data)
 
   const navigationData = [
     { name: "Home", href: "/" },

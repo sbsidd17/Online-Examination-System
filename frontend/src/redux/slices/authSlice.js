@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import axiosInstance from "../../config/axiosInstance";
 
 const initialState = {
+  hasPass: localStorage.getItem("hasPass") || false,
   isLoggedIn: localStorage.getItem("isLoggedIn") || false,
   role: localStorage.getItem("role") || "",
   data: JSON.parse(localStorage.getItem("data")) || {},
@@ -67,10 +68,12 @@ export const logout = createAsyncThunk("/auth/logout", async () => {
 });
 
 //forgot password
-export const forgotPassword = createAsyncThunk("/auth/forgot-password", async (data) => {
+export const forgotPassword = createAsyncThunk(
+  "/auth/forgot-password",
+  async (data) => {
     try {
       const res = axiosInstance.post("/auth/forgot-password", data);
-  
+
       toast.promise(res, {
         loading: "Wait! Sending Reset Password Link On Your Email...",
         success: (data) => {
@@ -83,13 +86,16 @@ export const forgotPassword = createAsyncThunk("/auth/forgot-password", async (d
       toast.error(error?.response?.data?.msg);
       throw error;
     }
-  });
+  }
+);
 
 //reset password
-export const resetPassword = createAsyncThunk("/auth/reset-password", async (data) => {
+export const resetPassword = createAsyncThunk(
+  "/auth/reset-password",
+  async (data) => {
     try {
       const res = axiosInstance.post("/auth/reset-password", data);
-  
+
       toast.promise(res, {
         loading: "Wait! Reseting Your Password...",
         success: (data) => {
@@ -102,13 +108,16 @@ export const resetPassword = createAsyncThunk("/auth/reset-password", async (dat
       toast.error(error?.response?.data?.msg);
       throw error;
     }
-  });
+  }
+);
 
-  //update profile
-  export const updateProfile = createAsyncThunk("/auth/update-profile", async (data) => {
+//update profile
+export const updateProfile = createAsyncThunk(
+  "/auth/update-profile",
+  async (data) => {
     try {
       const res = axiosInstance.post("/auth/update-profile", data);
-  
+
       toast.promise(res, {
         loading: "Updating Profile...",
         success: (data) => {
@@ -122,7 +131,8 @@ export const resetPassword = createAsyncThunk("/auth/reset-password", async (dat
       toast.error(error?.response?.data?.msg);
       throw error;
     }
-  });
+  }
+);
 
 const authSlice = createSlice({
   name: "userData",
@@ -133,6 +143,7 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         localStorage.setItem("isLoggedIn", true);
         localStorage.setItem("role", action?.payload?.user?.role);
+        localStorage.setItem("hasPass", action?.payload?.user?.hasPass);
         localStorage.setItem("data", JSON.stringify(action?.payload?.user));
         state.isLoggedIn = true;
         state.role = action?.payload?.user?.role;
@@ -143,11 +154,12 @@ const authSlice = createSlice({
         state.data = {};
         state.isLoggedIn = false;
         state.role = "";
+        state.hasPass = false;
       })
       .addCase(updateProfile.fulfilled, (state, action) => {
         localStorage.setItem("data", JSON.stringify(action?.payload?.user));
         state.data = action?.payload?.user;
-      })
+      });
   },
 });
 

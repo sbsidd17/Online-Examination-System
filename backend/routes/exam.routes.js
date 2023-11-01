@@ -1,6 +1,6 @@
 import express from "express";
-import { createCategory, deleteCategory, editCategory, showAllCategory } from "../controllers/category.controller.js";
-import { createExam, deleteExam, editExam, showAllExams } from "../controllers/Exam.controller.js";
+import { createCategory, deleteCategory, editCategory, getCategory, showAllCategory } from "../controllers/category.controller.js";
+import { createExam, deleteExam, editExam, getExamData, showAllExams } from "../controllers/Exam.controller.js";
 import { createAnswer, createOption, createQuestion, deleteAnswer, deleteOption, deleteQuestion, editAnswer, editOption, editQuestion, getQuestionData } from "../controllers/question.controller.js";
 import { createTest, deleteTest, editTest, getTestData, showAllTests } from "../controllers/test.controller.js";
 import { auth } from "../middlewares/auth.middleware.js";
@@ -14,11 +14,13 @@ examRoute.post("/create-category", auth, isAdmin, createCategory)
 examRoute.post("/edit-category", auth, isAdmin, editCategory)
 examRoute.post("/delete-category", auth, isAdmin, deleteCategory)
 examRoute.get("/all-categories", showAllCategory)
+examRoute.get("/get-category/:id", getCategory)
 
 //Exams Routes
 examRoute.post("/create-exam", auth, isInstructor, isApproved, uploadSingle, createExam)
 examRoute.post("/edit-exam", auth, isInstructor, isApproved, uploadSingle, editExam)
 examRoute.post("/delete-exam", auth, isInstructor, isApproved, deleteExam)
+examRoute.get("/get-exam-data/:exam_id", getExamData)
 examRoute.get("/all-exams", showAllExams)
 
 //Test Routes
@@ -26,7 +28,7 @@ examRoute.post("/create-test", auth, isInstructor, isApproved, createTest)
 examRoute.post("/delete-test", auth, isInstructor, isApproved, deleteTest)
 examRoute.post("/edit-test", auth, isInstructor, isApproved, editTest)
 examRoute.get("/all-tests", showAllTests)
-examRoute.get("/get-test-data/testId=:testId", auth, getTestData)
+examRoute.get("/get-test-data/:id", auth, getTestData)
 
 //Question Routes
 examRoute.post("/create-question", auth, isInstructor, isApproved, uploadSingle, createQuestion)
