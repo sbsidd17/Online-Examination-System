@@ -7,6 +7,9 @@ const categorySchema = mongoose.Schema({
   category_description: {
     type: String,
   },
+  category_image: {
+    type: String,
+  },
   exams: [
     {
       type: mongoose.Schema.Types.ObjectId,

@@ -2,13 +2,35 @@ import Category from "../models/category.model.js";
 
 const createCategory = async (req, res) => {
   // get data from body
-  const { category_name, category_description } = req.body;
+  const { category_name, category_description, category_image } = req.body;
 
   // validation
-  if (!category_name || !category_description) {
+  if (!category_name || !category_description || !category_image) {
     return res.status(401).json({
       success: "false",
       msg: "All Fields Are Required",
+    });
+  }
+
+  // take image and upload it to cloudnary
+  try {
+    const cloudinaryResponse = await cloudinary.uploader.upload(req.file.path, {
+      transformation: [{ width: 320, height: 180, crop: "fill" }],
+    });
+
+    category_image = cloudinaryResponse.secure_url;
+
+    // Delete file from server after upload to cloudinary
+    fs.unlink(req.file.path, (err) => {
+      if (err) {
+        return console.error("Error deleting file:", err);
+      }
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: "false",
+      msg: "Error in uploading Thumbnail",
+      error: error.message,
     });
   }
 
@@ -17,6 +39,7 @@ const createCategory = async (req, res) => {
     const category = await Category.create({
       category_name,
       category_description,
+      category_image,
       exams: [],
     });
 

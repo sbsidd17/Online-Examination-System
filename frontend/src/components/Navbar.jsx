@@ -33,7 +33,7 @@ export default function Navbar() {
     },
     {
       name: role === "Instructor" ? "InstructorDashboard" : "",
-      href: role === "Instructor" ? "/instructor-dashboard" : "",
+      href: role === "Instructor" ? `/instructor-dashboard/${data._id}` : "",
     },
   ];
 
