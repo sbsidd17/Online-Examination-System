@@ -1,6 +1,6 @@
 import express from "express";
 import { createCategory, deleteCategory, editCategory, getCategory, showAllCategory } from "../controllers/category.controller.js";
-import { createExam, deleteExam, editExam, getExamData, showAllExams } from "../controllers/Exam.controller.js";
+import { createExam, deleteExam, editExam, getExamData, showAllExams, showAllExamsByInstructor } from "../controllers/Exam.controller.js";
 import { createAnswer, createOption, createQuestion, deleteAnswer, deleteOption, deleteQuestion, editAnswer, editOption, editQuestion, getQuestionData } from "../controllers/question.controller.js";
 import { createTest, deleteTest, editTest, getTestData, showAllTests } from "../controllers/test.controller.js";
 import { auth } from "../middlewares/auth.middleware.js";
@@ -21,6 +21,7 @@ examRoute.post("/create-exam", auth, isInstructor, isApproved, uploadSingle, cre
 examRoute.post("/edit-exam", auth, isInstructor, isApproved, uploadSingle, editExam)
 examRoute.post("/delete-exam", auth, isInstructor, isApproved, deleteExam)
 examRoute.get("/get-exam-data/:exam_id", getExamData)
+examRoute.get("/get-exam-by-instructor/:instructor_id", auth, isInstructor, isApproved, showAllExamsByInstructor)
 examRoute.get("/all-exams", showAllExams)
 
 //Test Routes

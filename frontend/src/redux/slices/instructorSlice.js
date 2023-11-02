@@ -3,8 +3,29 @@ import toast from "react-hot-toast";
 import axiosInstance from "../../config/axiosInstance";
 
 const initialState = {
-  instructorData: {},
+  instructorExams: [],
 };
+
+export const getExamsByInstructor = createAsyncThunk(
+    "/get-exam-by-instructor",
+    async (instructor_id) => {
+      try {
+        const response = axiosInstance.get(`/exam/get-exam-by-instructor/${instructor_id}`);
+        toast.promise(response, {
+          loading: "Wait! Loading Exam",
+          success: (data) => {
+            return data?.data?.msg;
+          },
+          error: "Failed to load exam",
+        });
+        // console.log(await response);
+        return (await response).data;
+      } catch (error) {
+        throw error.message; // Handle and return a specific error message
+      }
+    }
+  );
+
 
 export const createExam = createAsyncThunk(
   "/exam/create-exam",
@@ -304,7 +325,13 @@ const instructorSlice = createSlice({
   name: "instructorSlice",
   initialState,
   reducers: {},
-  extraReducers: () => {},
+  extraReducers: (builder) => {
+    builder
+    .addCase(getExamsByInstructor.fulfilled, (state, action)=>{
+        // console.log(action.payload.allExams)
+        state.instructorExams = action.payload.allExams
+    })
+  },
 });
 
 // export const {  } = instructorSlice.actions;
