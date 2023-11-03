@@ -36,6 +36,7 @@ const createExam = async (req, res) => {
       }
     });
   } catch (error) {
+    console.log(error.message)
     return res.status(501).json({
       success: "false",
       msg: "Error in uploading Thumbnail",

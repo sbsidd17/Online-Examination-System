@@ -2,9 +2,8 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { FcAddImage, FcEditImage } from "react-icons/fc";
+import { FcAddImage} from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
-import { updateProfile } from "../redux/slices/authSlice";
 import { getAllCategory } from "../redux/slices/examSlice";
 import { createExam } from "../redux/slices/instructorSlice";
 
@@ -43,11 +42,7 @@ function Profile() {
         toast.error("All Feilds Are Mandatory")
         return;
     }
-
-    if(typeof price !== String || price < 0){
-        toast.error("Enter Price Correctly")
-        return
-    }
+    
     const formData = new FormData();
     formData.append("exam_name", name);
     formData.append("exam_description", description);
@@ -63,7 +58,7 @@ function Profile() {
   }, []);
 
   return (
-    <div className="mt-[70px] w-full h-[calc(100vh-70px)] p-20 flex justify-center items-center">
+    <div className="mt-[70px] w-full h-[calc(100vh-70px)] p-20 flex justify-center items-center">       
       {/* main div */}
       <div className="flex w-full bg-white shadow-lg p-5">
         <form className="flex w-full gap-5">
