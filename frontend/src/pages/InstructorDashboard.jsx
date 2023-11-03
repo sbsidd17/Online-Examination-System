@@ -39,7 +39,7 @@ function InstructorDashboard() {
           <h1 className="text-2xl font-semibold text-slate-500">
             Exams Created By You
           </h1>
-          <div className="w-full flex flex-wrap justify-center items-start">
+          <div className="w-full flex flex-wrap justify-center items-start gap-5">
             {examData.map((exam) => {
               return <InstructorExamCard key={exam._id} exam={exam} />;
             })}

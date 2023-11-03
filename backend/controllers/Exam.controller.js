@@ -36,7 +36,7 @@ const createExam = async (req, res) => {
       }
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(501).json({
       success: "false",
       msg: "Error in uploading Thumbnail",
       error: error.message,
@@ -68,7 +68,7 @@ const createExam = async (req, res) => {
       updatedCategory,
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(502).json({
       success: "false",
       msg: "Something Went Wrong",
       error: error.message,

@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import { Link } from "react-router-dom";
+import {FcDeleteDatabase, FcDataRecovery} from "react-icons/fc"
 
 function InstructorExamCard({ exam }) {
   return (
@@ -15,14 +16,16 @@ function InstructorExamCard({ exam }) {
       <div className="text-sm">
         Enrolled Users : {exam.enrolled_student.length}
       </div>
-      <div className="flex">
-      <Link to={`/edit-exam/${exam._id}`} className="w-full">
-        <button className="bg-[#0ad0f4] text-white px-5 py-2 rounded-md transition-all duration-200 hover:bg-[#12c1e0] hover:scale-95">
+      <div className="flex justify-between items-center">
+      <Link to={`/edit-exam/${exam._id}`} >
+        <button className="flex justify-center items-center gap-1 bg-[#0ad0f4] text-white px-5 py-2 rounded-md transition-all duration-200 hover:bg-[#12c1e0] hover:scale-95">
           Edit Exam
+          <FcDataRecovery size={22}/>
         </button>
       </Link>
-      <button className="bg-[#0ad0f4] text-white px-5 py-2 rounded-md transition-all duration-200 hover:bg-[#12c1e0] hover:scale-95">
+      <button className="flex justify-center items-center gap-1 bg-[#0ad0f4] text-white px-5 py-2 rounded-md transition-all duration-200 hover:bg-[#12c1e0] hover:scale-95">
           Delete
+          <FcDeleteDatabase size={22}/>
         </button>
       </div>
     </div>
