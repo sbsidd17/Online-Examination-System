@@ -27,7 +27,7 @@ function Exam() {
         </div>
 
         {/* right div */}
-        <div className="flex flex-col gap-5 p-5">
+        <div className="flex flex-col gap-5 p-5 w-1/2">
           <h1 className="text-3xl text-slate-500 font-sans font-semibold">{exam?.exam_name}</h1>
           <p className=" text-slate-700">{exam.exam_description}</p>
           <p className=" text-slate-700">Total Tests : {exam?.all_tests?.length}</p>

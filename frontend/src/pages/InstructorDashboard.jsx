@@ -11,7 +11,6 @@ function InstructorDashboard() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const examData = useSelector((state) => state.instructor.instructorExams);
-  console.log(examData);
   async function getExamData() {
     await dispatch(getExamsByInstructor(id));
   }

@@ -11,11 +11,11 @@ function InstructorExamCard({ exam }) {
   const dispatch = useDispatch()
 
   function openModal(){
-      document.querySelector("#modal").classList.remove("hidden")
+      document.getElementById(`${exam._id}`).classList.remove("hidden")
   }
 
   function closeModal(){
-    document.querySelector("#modal").classList.add("hidden")
+    document.getElementById(`${exam._id}`).classList.add("hidden")
   }
 
   async function deleteHandler(){
@@ -23,7 +23,7 @@ function InstructorExamCard({ exam }) {
       exam_id:exam._id,
       category_id:exam.category
     }))
-    document.querySelector("#modal").classList.add("hidden")
+    document.getElementById(`${exam._id}`).classList.add("hidden")
   }
   return (
     <>
@@ -52,7 +52,7 @@ function InstructorExamCard({ exam }) {
         </div>
       </div>
       {/* delete exam confirmation modal */}
-      <main id="modal" className="hidden z-[99] fixed top-0 left-0 w-screen h-screen antialiased bg-[#6e6c6c00] text-gray-900 font-sans overflow-x-hidden">
+      <main id={exam._id} className="hidden z-[99] fixed top-0 left-0 w-screen h-screen antialiased bg-[#6e6c6c00] text-gray-900 font-sans overflow-x-hidden">
         <div className="relative px-4 min-h-screen md:flex md:items-center md:justify-center">
           <div className="bg-black opacity-25 w-full h-full absolute z-10 inset-0"></div>
           <div className="bg-white rounded-lg md:max-w-md md:mx-auto p-4 fixed inset-x-0 bottom-0 z-50 mb-4 mx-4 md:relative">

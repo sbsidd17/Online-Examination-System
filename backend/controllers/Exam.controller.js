@@ -36,7 +36,7 @@ const createExam = async (req, res) => {
       }
     });
   } catch (error) {
-    console.log(error.message)
+    console.log(error.message);
     return res.status(501).json({
       success: "false",
       msg: "Error in uploading Thumbnail",
@@ -118,6 +118,10 @@ const editExam = async (req, res) => {
     }
   }
 
+  // Find previous category id, after updating exam in mew category we will delete exam from previous catagory
+  const fExam = await Exam.findById({ _id: exam_id });
+  const previousCategory = fExam.category;
+
   // update exam in db
   try {
     const updatedExam = await Exam.findByIdAndUpdate(
@@ -133,18 +137,25 @@ const editExam = async (req, res) => {
       { new: true }
     ).exec();
 
-    // Add Exam in category exams list
-    const updatedCategory = await Category.findByIdAndUpdate(
-      { _id: category },
-      { $push: { exams: updatedExam._id } },
-      { new: true }
-    ).exec();
+    if (previousCategory != category) {
+      // Add Exam in category exams list
+      await Category.findByIdAndUpdate(
+        { _id: category },
+        { $push: { exams: updatedExam._id } },
+        { new: true }
+      ).exec();
+
+      //delete exam from catagory
+      await Category.findByIdAndUpdate(
+        { _id: previousCategory },
+        { $pull: { exams: exam_id } }
+      );
+    }
 
     return res.status(200).json({
       success: "true",
       msg: "Exam Created Successfully",
       updatedExam,
-      updatedCategory,
     });
   } catch (error) {
     return res.status(500).json({
@@ -208,7 +219,7 @@ const showAllExams = async (req, res) => {
 const showAllExamsByInstructor = async (req, res) => {
   const { instructor_id } = req.params;
   try {
-    const allExams = await Exam.find({ instructor: instructor_id })
+    const allExams = await Exam.find({ instructor: instructor_id });
     // return response
     return res.status(200).json({
       success: "true",
@@ -291,4 +302,11 @@ const deleteExam = async (req, res) => {
   }
 };
 
-export { createExam, showAllExams, showAllExamsByInstructor, getExamData, editExam, deleteExam };
+export {
+  createExam,
+  showAllExams,
+  showAllExamsByInstructor,
+  getExamData,
+  editExam,
+  deleteExam,
+};
