@@ -58,13 +58,13 @@ function CreateExam() {
   }, []);
 
   return (
-    <div className="mt-[70px] w-full h-[calc(100vh-70px)] p-20 flex justify-center items-center">       
+    <div className="mt-[70px] w-full h-[calc(100vh-70px)] p-5 md:p-20 flex justify-center items-center">       
       {/* main div */}
       <div className="flex w-full bg-white shadow-lg p-5">
-        <form className="flex w-full gap-5">
+        <form className="flex flex-col md:flex-row w-full gap-5">
           {/* left */}
           {/* thumbnail */}
-          <div className="flex justify-center items-center w-1/2">
+          <div className="flex justify-center items-center w-full md:w-1/2">
             <input
               type="file"
               id="image"
@@ -88,7 +88,7 @@ function CreateExam() {
           </div>
 
           {/* Right div */}
-          <div className="flex flex-col w-1/2 gap-5">
+          <div className="flex flex-col w-full md:w-1/2 gap-5">
             {/*name */}
             <input
               type="text"

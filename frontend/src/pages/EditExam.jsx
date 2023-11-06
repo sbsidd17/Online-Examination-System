@@ -2,9 +2,10 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { FcAddImage } from "react-icons/fc";
+import { FcAddDatabase, FcAddImage } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import InstructorTestCard from "../components/InstructorTestCard";
 import { getAllCategory, getExamById } from "../redux/slices/examSlice";
 import { editExam } from "../redux/slices/instructorSlice";
 
@@ -46,7 +47,7 @@ function EditExam() {
       name === "" ||
       description === "" ||
       price === "" ||
-      selectedCategory === "" 
+      selectedCategory === ""
     ) {
       toast.error("All Feilds Are Mandatory");
       return;
@@ -83,13 +84,14 @@ function EditExam() {
   }, [examData]);
 
   return (
-    <div className="mt-[70px] w-full h-[calc(100vh-70px)] p-20 flex justify-center items-center">
+    <div className="mt-[70px] w-full px-5 md:px-20 py-5 flex justify-center items-center">
       {/* main div */}
-      <div className="flex w-full bg-white shadow-lg p-5">
-        <form className="flex w-full gap-5">
+      <div className="flex flex-col gap-10 w-full bg-white shadow-lg p-5">
+        {/* edit exam details */}
+        <form className="flex flex-col md:flex-row w-full gap-5">
           {/* left */}
           {/* thumbnail */}
-          <div className="flex justify-center items-center w-1/2">
+          <div className="flex justify-center items-center w-full md:w-1/2">
             <input
               type="file"
               id="image"
@@ -113,7 +115,7 @@ function EditExam() {
           </div>
 
           {/* Right div */}
-          <div className="flex flex-col w-1/2 gap-5">
+          <div className="flex flex-col w-full md:w-1/2 gap-5">
             {/*name */}
             <input
               type="text"
@@ -165,6 +167,33 @@ function EditExam() {
             </button>
           </div>
         </form>
+        <section className="flex flex-col gap-10 justify-center items-center">
+          {/* Add Test */}
+          <Link
+            to={`/create-test/${id}`}
+          >
+            <button className="flex justify-center items-center gap-2 bg-green-400 px-5 py-2 text-white rounded-md hover:bg-green-500 transition-all duration-200 hover:scale-95">
+              Create New Test
+              <FcAddDatabase size={32} />
+            </button>
+          </Link>
+          {/* Show all test */}
+          <div className="flex flex-col gap-5 justify-center items-center">
+            <h1 className="text-2xl text-slate-500 font-semibold">
+              All Tests ({examData?.all_tests?.length})
+            </h1>
+            {/* test card */}
+            {examData?.all_tests?.length !== 0 ? (
+              <div className="flex flex-wrap justify-center items-center gap-5">
+                {examData?.all_tests?.map((test) => (
+                  <InstructorTestCard key={test._id} test={test} exam_id={id}/>
+                ))}
+              </div>
+            ) : (
+              <div>You have not created any exam till now...</div>
+            )}
+          </div>
+        </section>
       </div>
     </div>
   );

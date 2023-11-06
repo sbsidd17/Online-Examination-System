@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom"
 import CreateExam from "../pages/CreateExam"
+import CreateTest from "../pages/CreateTest"
 import EditExam from "../pages/editExam"
 import Exam from "../pages/Exam"
 import InstructorDashboard from "../pages/InstructorDashboard"
@@ -16,6 +17,7 @@ function ExamsRoutes() {
         <Route path="/instructor-dashboard/:id" element={<InstructorDashboard />}/>
         <Route path="/create-exam/" element={<CreateExam />}/>
         <Route path="/edit-exam/:id" element={<EditExam />}/>
+        <Route path="/create-test/:id" element={<CreateTest />}/>
       </Routes>
     </>
   )

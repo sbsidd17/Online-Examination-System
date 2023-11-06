@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { FcAddDatabase } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { Alert } from "../components/Alert";
 import InstructorExamCard from "../components/InstructorExamCard";
 import { getExamsByInstructor } from "../redux/slices/instructorSlice";
 
@@ -20,7 +19,6 @@ function InstructorDashboard() {
   }, [id]);
   return (
     <div className="mt-[70px] w-full">
-      <Alert />
       {/* main div */}
       <div className="w-full flex flex-col bg-[#fbfcfc] gap-10">
         <div className="w-full flex justify-center items-center pt-5">

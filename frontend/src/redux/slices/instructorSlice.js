@@ -88,7 +88,7 @@ export const createTest = createAsyncThunk(
   "/exam/create-test",
   async (data) => {
     try {
-      const response = axiosInstance.get(`/exam/create-test`, data);
+      const response = axiosInstance.post(`/exam/create-test`, data);
       toast.promise(response, {
         loading: "Wait! Creating Test",
         success: (data) => {
@@ -125,7 +125,7 @@ export const deleteTest = createAsyncThunk(
   "/exam/delete-exam",
   async (data) => {
     try {
-      const response = axiosInstance.get(`/exam/delete-exam`, data);
+      const response = axiosInstance.post(`/exam/delete-test`, data);
       toast.promise(response, {
         loading: "Wait! Deleting Test",
         success: (data) => {

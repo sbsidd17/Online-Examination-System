@@ -154,7 +154,7 @@ const editExam = async (req, res) => {
 
     return res.status(200).json({
       success: "true",
-      msg: "Exam Created Successfully",
+      msg: "Exam Saved Successfully",
       updatedExam,
     });
   } catch (error) {
