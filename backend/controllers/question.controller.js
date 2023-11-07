@@ -212,9 +212,9 @@ const deleteQuestion = async (req, res) => {
 
 //=======================================Get Question Data===============================================
 const getQuestionData = async (req, res) => {
-  const { questionId } = req.params;
+  const { id } = req.params;
   try {
-    const questionData = await Question.findById({ _id: questionId })
+    const questionData = await Question.findById({ _id: id })
     .populate(["options", "answer"])
     ;
     // return response

@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import axiosInstance from "../../config/axiosInstance";
 
 const initialState = {
-  instructorExams: [],
+  instructorExams: []
 };
 
 export const getExamsByInstructor = createAsyncThunk(
@@ -106,7 +106,8 @@ export const createTest = createAsyncThunk(
 
 export const editTest = createAsyncThunk("/exam/edit-test", async (data) => {
   try {
-    const response = axiosInstance.get(`/exam/edit-test`, data);
+    console.log(data)
+    const response = axiosInstance.post(`/exam/edit-test`, data);
     toast.promise(response, {
       loading: "Wait! Saving Test",
       success: (data) => {
@@ -145,7 +146,7 @@ export const createQuestion = createAsyncThunk(
   "/exam/create-question",
   async (data) => {
     try {
-      const response = axiosInstance.get(`/exam/create-question`, data);
+      const response = axiosInstance.post(`/exam/create-question`, data);
       toast.promise(response, {
         loading: "Wait! Creating Question",
         success: (data) => {
@@ -205,7 +206,7 @@ export const createOption = createAsyncThunk(
   "/exam/create-test",
   async (data) => {
     try {
-      const response = axiosInstance.get(`/exam/create-option`, data);
+      const response = axiosInstance.post(`/exam/create-option`, data);
       toast.promise(response, {
         loading: "Wait! Creating Option",
         success: (data) => {
@@ -265,13 +266,13 @@ export const createAnswer = createAsyncThunk(
   "/exam/create-answer",
   async (data) => {
     try {
-      const response = axiosInstance.get(`/exam/create-answer`, data);
+      const response = axiosInstance.post(`/exam/create-answer`, data);
       toast.promise(response, {
         loading: "Wait! Creating Option",
         success: (data) => {
           return data?.data?.msg;
         },
-        error: "Failed to create option",
+        error: "Failed to Save Answer",
       });
       // console.log(await response)
       return (await response).data;

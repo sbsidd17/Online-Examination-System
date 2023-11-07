@@ -178,13 +178,13 @@ function EditExam() {
             </button>
           </Link>
           {/* Show all test */}
-          <div className="flex flex-col gap-5 justify-center items-center">
+          <div className="flex flex-col gap-5 justify-center items-center w-full">
             <h1 className="text-2xl text-slate-500 font-semibold">
               All Tests ({examData?.all_tests?.length})
             </h1>
             {/* test card */}
             {examData?.all_tests?.length !== 0 ? (
-              <div className="flex flex-wrap justify-center items-center gap-5">
+              <div className="flex flex-wrap justify-center items-center gap-5 w-full">
                 {examData?.all_tests?.map((test) => (
                   <InstructorTestCard key={test._id} test={test} exam_id={id}/>
                 ))}

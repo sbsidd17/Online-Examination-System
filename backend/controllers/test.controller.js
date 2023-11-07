@@ -65,8 +65,6 @@ const editTest = async (req, res) => {
   const { test_name, total_questions, total_marks, total_time, test_id } =
     req.body;
 
-  console.log(test_id);
-
   // check test is avalable or not
   const test = await Test.findById({ _id: test_id });
   if (!test) {
@@ -169,6 +167,12 @@ const deleteTest = async (req, res) => {
       { _id: exam_id },
       { $pull: { all_tests: test_id } }
     );
+
+    // return response
+    return res.status(200).json({
+      success: "true",
+      msg: "Test Deleted Successfully",
+    });
   } catch (error) {
     return res.status(500).json({
       success: "false",
@@ -181,14 +185,12 @@ const deleteTest = async (req, res) => {
 const getTestData = async (req, res) => {
   const { id } = req.params;
   try {
-    const testData = await Test.findById({ _id: id })
-    .populate({
+    const testData = await Test.findById({ _id: id }).populate({
       path: "questions",
-      populate:{
-        path: "options answer"
-      }
-    })
-    ;
+      populate: {
+        path: "options answer",
+      },
+    });
     // return response
     return res.status(200).json({
       success: "true",

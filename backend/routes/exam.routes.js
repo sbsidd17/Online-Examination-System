@@ -35,7 +35,7 @@ examRoute.get("/get-test-data/:id", auth, getTestData)
 examRoute.post("/create-question", auth, isInstructor, isApproved, uploadSingle, createQuestion)
 examRoute.post("/edit-question", auth, isInstructor, isApproved, uploadSingle, editQuestion)
 examRoute.post("/delete-question", auth, isInstructor, isApproved, deleteQuestion)
-examRoute.get("/get-question-data/questionId=:questionId", auth, isInstructor, getQuestionData)
+examRoute.get("/get-question-data/:id", auth, isInstructor, getQuestionData)
 
 //Option Routes
 examRoute.post("/create-option", auth, isInstructor, isApproved, uploadSingle, createOption)

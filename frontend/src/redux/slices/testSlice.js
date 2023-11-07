@@ -5,9 +5,27 @@ import axiosInstance from "../../config/axiosInstance";
 const initialState = {
   test: {
     testData : {},
-    testResult : {}
+    testResult : {},
+    questionData:{}
   },
 };
+
+export const getQuestionData = createAsyncThunk("/exam/get-question-data/", async (id) => {
+  try {
+      const response = axiosInstance.get(`/exam/get-question-data/${id}`);
+      toast.promise(response, {
+        loading: "Wait! Loading Question Data",
+        success: (data) => {
+          return data?.data?.msg;
+        },
+        error: "Failed to load Question",
+      })
+      // console.log(await response)
+      return (await response).data;
+    } catch (error) {
+      throw error.message; // Handle and return a specific error message
+    }
+  });
 
 export const getTestData = createAsyncThunk("/exam/get-test-data", async (id) => {
     try {
@@ -39,6 +57,9 @@ const testSlice = createSlice({
     .addCase(getTestData.fulfilled, (state, action)=>{
         // console.log(action.payload.testData)
         state.test.testData = action.payload.testData
+    })
+    .addCase(getQuestionData.fulfilled, (state, action)=>{
+      state.test.questionData = action.payload.questionData
     })
   },
 });
