@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcDeleteDatabase, FcDataRecovery } from "react-icons/fc";
 import { useDispatch } from "react-redux";
 import { deleteExam } from "../redux/slices/instructorSlice";
@@ -9,6 +9,7 @@ import {GoAlert} from "react-icons/go"
 
 function InstructorExamCard({ exam }) {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   function openModal(){
       document.getElementById(`${exam._id}`).classList.remove("hidden")
@@ -19,11 +20,15 @@ function InstructorExamCard({ exam }) {
   }
 
   async function deleteHandler(){
-    await dispatch(deleteExam({
+    const res = await dispatch(deleteExam({
       exam_id:exam._id,
       category_id:exam.category
     }))
-    document.getElementById(`${exam._id}`).classList.add("hidden")
+    if(res.payload.success){
+      document.getElementById(`${exam._id}`).classList.add("hidden")
+      window.location.reload()
+    }
+    
   }
   return (
     <>

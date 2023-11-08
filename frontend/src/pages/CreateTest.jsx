@@ -1,7 +1,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { createTest } from "../redux/slices/instructorSlice";
 
 function CreateTest() {
@@ -15,6 +15,7 @@ function CreateTest() {
   });
 
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   function onChangeHandler(e) {
     setTestData({ ...testData, [e.target.name]: e.target.value });
@@ -27,7 +28,9 @@ function CreateTest() {
          return
     }
     const res = await dispatch(createTest(testData));
-    console.log(res.payload.test);
+    if(res.payload.success){
+      navigate(-1)
+    }
   }
   return (
     <div className="mt-[70px] w-full p-5 md:p-20 flex flex-col justify-center items-center">
@@ -36,7 +39,7 @@ function CreateTest() {
           Create Test
         </h1>
       </div>
-      <form className="w-full flex flex-col gap-5 justify-center items-center bg-white shadow-md p-20">
+      <form className="w-full flex flex-col gap-5 justify-center items-center bg-white shadow-md p-5 md:p-20">
         <input
           className="w-full border bg-transparent focus:outline-none  p-2 rounded-md"
           type="text"

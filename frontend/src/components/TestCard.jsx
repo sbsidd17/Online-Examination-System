@@ -8,11 +8,11 @@ function TestCard({ test }) {
   const { isLoggedIn, hasPass } = useSelector((state) => state.auth);
   return (
     // main div
-    <div className="flex justify-between items-center bg-white w-full shadow-md py-5 px-20">
+    <div className="flex justify-between items-center bg-white w-full shadow-md p-5 md:px-20">
       {/* left */}
       <div className="flex flex-col gap-2 w-1/2">
         <h1>{test.test_name}</h1>
-        <div className="flex justify-start items-center gap-2">
+        <div className="flex flex-col md:flex-row justify-start items-start gap-2">
           <div className="flex justify-center items-center">
             <FcQuestions />
             <p className="text-sm text-slate-500">{`${test.total_questions} Questions`}</p>

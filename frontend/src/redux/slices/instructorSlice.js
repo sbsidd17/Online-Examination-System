@@ -39,7 +39,6 @@ export const createExam = createAsyncThunk(
         },
         error: "Failed to create exam",
       });
-      console.log(await response);
       return (await response).data;
     } catch (error) {
       throw error.message; // Handle and return a specific error message

@@ -4,6 +4,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { FcAddImage} from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { getAllCategory } from "../redux/slices/examSlice";
 import { createExam } from "../redux/slices/instructorSlice";
 
@@ -16,6 +17,7 @@ function CreateExam() {
   const [selectedCategory, setSelectedCategory] = useState("");
 
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const categories = useSelector(
     (state) => state.exam.categories.allCategories
   );
@@ -50,7 +52,9 @@ function CreateExam() {
     formData.append("category", selectedCategory);
     formData.append("image", imageFile);
     const res = await dispatch(createExam(formData))
-    console.log(res)
+    if(res.payload.success){
+      navigate(-1)
+    }
   }
 
   useEffect(() => {

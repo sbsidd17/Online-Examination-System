@@ -70,7 +70,7 @@ function EditTest() {
           Edit Test
         </h1>
       </div>
-      <form className="w-full flex flex-col gap-5 justify-center items-center bg-white shadow-md p-20">
+      <form className="w-full flex flex-col gap-5 justify-center items-center bg-white shadow-md p-5 md:p-20">
         <input
           className="w-full border bg-transparent focus:outline-none  p-2 rounded-md"
           type="text"

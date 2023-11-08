@@ -27,6 +27,7 @@ const createExam = async (req, res) => {
       transformation: [{ width: 320, height: 180, crop: "fill" }],
     });
 
+
     thumbnail = cloudinaryResponse.secure_url;
 
     // Delete file from server after upload to cloudinary
@@ -36,7 +37,7 @@ const createExam = async (req, res) => {
       }
     });
   } catch (error) {
-    console.log(error.message);
+    // console.log(error.message);
     return res.status(501).json({
       success: "false",
       msg: "Error in uploading Thumbnail",
