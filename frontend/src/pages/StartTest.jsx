@@ -6,6 +6,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getTestData, testResult } from "../redux/slices/testSlice";
+import Timer from "../components/Timer";
 
 function StartTest() {
   // State variables
@@ -30,6 +31,7 @@ function StartTest() {
   useEffect(() => {
     getQuizData();
   }, [id]);
+
 
   // Option change handler
   function optionChangeHandler(e) {
@@ -121,8 +123,9 @@ function StartTest() {
         <div className="h-[calc(100vh-4rem)] md:w-[70%] flex flex-col justify-between">
           <div>
             {/* Category Section */}
-            <div className='className="flex  items-center border-b-2 p-3 font-sans font-bold'>
-              <div>Test Name : {testData.test_name}</div>
+            <div className="flex justify-between items-center border-b-2 p-3 font-sans font-bold">
+              <div>Test Name : {testData?.test_name}</div>
+              <Timer givenTime={testData?.total_time} submitHandler={submitHandler}/>
             </div>
             {/* Quiz Header */}
             <div>
