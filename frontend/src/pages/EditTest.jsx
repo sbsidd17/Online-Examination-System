@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { FcAddDatabase } from "react-icons/fc";
-import { GrClose } from "react-icons/gr";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import QuestionCard from "../components/QuestionCard";
 import { editTest } from "../redux/slices/instructorSlice";
 import { getTestData } from "../redux/slices/testSlice";
 import CreateQuestion from "./CreateQuestion";
@@ -130,8 +130,8 @@ function EditTest() {
       {/* question card */}
       {test?.questions?.length !== 0 ? (
         <div className="flex flex-wrap justify-center items-center gap-5 w-full">
-          {test?.questions?.map((test) => (
-            <div key={test._id}>question</div>
+          {test?.questions?.map((question) => (
+            <QuestionCard key={question._id} data={question} test_id={id} />
           ))}
         </div>
       ) : (

@@ -186,13 +186,13 @@ export const deleteQuestion = createAsyncThunk(
   "/exam/delete-question",
   async (data) => {
     try {
-      const response = axiosInstance.get(`/exam/delete-question`, data);
+      const response = axiosInstance.post(`/exam/delete-question`, data);
       toast.promise(response, {
         loading: "Wait! Deleting Question",
         success: (data) => {
           return data?.data?.msg;
         },
-        error: "Failed to delete test",
+        error: "Failed to delete question",
       });
       // console.log(await response)
       return (await response).data;

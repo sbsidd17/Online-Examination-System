@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { GrClose } from "react-icons/gr";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 import {
   createAnswer,
   createOption,
@@ -13,38 +12,34 @@ import { getQuestionData } from "../redux/slices/testSlice";
 
 function CreateQuestion({ test_id, setOpenAddQuestion }) {
   const [questionTitle, setQuestionTitle] = useState("");
-  const [questionImage, setQuestionImage] = useState("");
   const [questionId, setQuestionId] = useState("");
   const [optionTitle, setOptionTitle] = useState("");
-  const [optionImage, setOptionImage] = useState("");
   const [answerTitle, setAnswerTitle] = useState("");
-  const { id } = useParams();
   const dispatch = useDispatch();
   const question = useSelector((state) => state.test.test.questionData);
 
   async function addQuestionHandler() {
-    const questionData = new FormData();
-    questionData.append("question_title", questionTitle);
-    questionData.append("image", questionImage);
-    questionData.append("test_id", test_id);
-    console.log(questionData);
-    const res = await dispatch(createQuestion(questionData));
+    const res = await dispatch(
+      createQuestion({
+        question_title: questionTitle,
+        test_id: test_id,
+      })
+    );
     if (res.payload.success) {
       setQuestionId(res.payload.question._id);
     }
   }
 
   async function addOptionHandler() {
-    const optionData = new FormData();
-    optionData.append("option_title", optionTitle);
-    optionData.append("image", optionImage);
-    optionData.append("question_id", questionId);
-    console.log(optionData);
-    const res = await dispatch(createOption(optionData));
+    const res = await dispatch(
+      createOption({
+        option_title: optionTitle,
+        question_id: questionId,
+      })
+    );
     console.log(res);
     await dispatch(getQuestionData(questionId));
-    setOptionTitle("")
-    setOptionImage("")
+    setOptionTitle("");
   }
 
   async function saveHandler() {
@@ -76,13 +71,7 @@ function CreateQuestion({ test_id, setOpenAddQuestion }) {
               onChange={(e) => setQuestionTitle(e.target.value)}
               disabled={questionId ? true : false}
             />
-            <div className={questionId ? "hidden" : "flex flex-col"}>
-              <p>Question Image</p>
-              <input
-                type="file"
-                onChange={(e) => setQuestionImage(e.target.files[0])}
-              />
-            </div>
+
             <button
               onClick={addQuestionHandler}
               className={
@@ -113,13 +102,7 @@ function CreateQuestion({ test_id, setOpenAddQuestion }) {
                 value={optionTitle}
                 onChange={(e) => setOptionTitle(e.target.value)}
               />
-              <div className="flex flex-col">
-                <p>Option Image</p>
-                <input
-                  type="file"
-                  onChange={(e) => setOptionImage(e.target.files[0])}
-                />
-              </div>
+
               <button
                 onClick={addOptionHandler}
                 className="bg-[#0ad0f4] text-white text-sm rounded-md p-2 hover:bg-[#07bcdc]"
@@ -147,7 +130,12 @@ function CreateQuestion({ test_id, setOpenAddQuestion }) {
           ))}
         </select>
         <div className="flex justify-center items-center mt-3">
-        <button className="w-[200px] bg-[#0ad0f4] text-white p-1 rounded-md transition-all duration-200 hover:bg-[#12c1e0] hover:scale-95" onClick={saveHandler}>Save</button>
+          <button
+            className="w-[200px] bg-[#0ad0f4] text-white p-1 rounded-md transition-all duration-200 hover:bg-[#12c1e0] hover:scale-95"
+            onClick={saveHandler}
+          >
+            Save
+          </button>
         </div>
       </div>
     </div>
