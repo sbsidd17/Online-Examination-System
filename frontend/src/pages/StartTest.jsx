@@ -2,7 +2,7 @@
 import { useState } from "react";
 import "../index.css";
 import { FaUserCircle } from "react-icons/fa";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getTestData, testResult } from "../redux/slices/testSlice";
@@ -45,12 +45,13 @@ function StartTest() {
 
   // Submit handler
   async function submitHandler() {
+    console.log(selectedOptions)
     let r = 0;
     let w = 0;
     let n = 0;
   
     for (let i = 0; i < Quizdata?.length; i++) {
-      if (selectedOptions[i] === Quizdata[i]?.answer) {
+      if (selectedOptions[i] === Quizdata[i]?.answer.answer_title) {
         r++;
       } else if (selectedOptions[i] === undefined) {
         n++;

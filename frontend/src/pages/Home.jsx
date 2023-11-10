@@ -10,7 +10,6 @@ import {
   FcFaq,
   FcGraduationCap,
   FcIdea,
-  FcImageFile,
   FcInspection,
   FcReading,
 } from "react-icons/fc";
