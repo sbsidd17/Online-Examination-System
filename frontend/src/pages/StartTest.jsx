@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState } from "react";
 import "../index.css";
-import { FaUserCircle } from "react-icons/fa";
 import {useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -22,13 +21,17 @@ function StartTest() {
   const navigate = useNavigate()
   const testData = useSelector((state) => state.test.test.testData);
   const Quizdata = testData?.questions;
+  const userData = useSelector((state)=> state.auth.data)
 
   const { id } = useParams();
   async function getQuizData() {
     await dispatch(getTestData(id));
   }
 
+
   useEffect(() => {
+    document.querySelector("#nav").classList.add("hidden")
+    document.querySelector("#test").requestFullscreen()
     getQuizData();
   }, [id]);
 
@@ -41,11 +44,12 @@ function StartTest() {
     }));
     setAnsweredQuestions((prev) => [...new Set([...prev, questionIndex])]);
     setAnswered((pre) => pre + 1);
+    // console.log(selectedOptions)
   }
 
   // Submit handler
   async function submitHandler() {
-    console.log(selectedOptions)
+    // console.log(selectedOptions)
     let r = 0;
     let w = 0;
     let n = 0;
@@ -68,8 +72,12 @@ function StartTest() {
       ans: r + w,
       marked: marked,
       markedAndAnswered: markedAndAnswered,
+      selectedOptions,
+      answeredQuestions
     };
-  
+    
+    document.querySelector("#nav").classList.remove("hidden")
+    // document.querySelector("#test").exitFullscreen()
   
     await dispatch(testResult(result));
     navigate(`/test-result/${testData._id}`);
@@ -119,9 +127,9 @@ function StartTest() {
   // Render quiz component
   return (
     <>
-      <div className="flex flex-col md:flex-row mt-[70px] w-full h-[calc(100vh-70px)]">
+      <div className="flex flex-col md:flex-row w-full h-screen" id="test">
         {/* Left Section */}
-        <div className="h-[calc(100vh-4rem)] md:w-[70%] flex flex-col justify-between">
+        <div className="h-full md:w-[70%] flex flex-col justify-between">
           <div>
             {/* Category Section */}
             <div className="flex justify-between items-center border-b-2 p-3 font-sans font-bold">
@@ -222,12 +230,12 @@ function StartTest() {
           </div>
         </div>
         {/* Right Section */}
-        <div className="flex flex-col justify-between md:w-[30%] h-[calc(100vh-4rem)] bg-cyan-100 overflow-x-auto ">
+        <div className="flex flex-col justify-between md:w-[30%] bg-cyan-100 overflow-x-auto ">
           {/* User Details */}
           <div>
             <div className="flex gap-2 items-center p-2 border-b-2">
-              <FaUserCircle size={32} color="cyan" />
-              <span>UserName</span>
+              <img src={userData?.userProfile?.profile_image} alt="userImg" className="w-8 h-8 rounded-full" />
+              <span>{`${userData?.first_name} ${userData?.last_name}`}</span>
             </div>
             {/* Quiz Statistics */}
             <div className="flex flex-wrap gap-5 p-4">

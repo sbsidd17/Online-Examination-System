@@ -13,4 +13,21 @@
   text-align: center;
 }
 
+:fullscreen {
+  background-color: #fff; 
+}
+
+:-ms-fullscreen {
+  background-color: #fff; 
+}
+
+:-moz-full-screen {
+  background-color: #fff; 
+}
+
+:-webkit-full-screen {
+  background-color: #fff; 
+}
+
+
 

@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import {FcPrint} from "react-icons/fc"
+import { FcPrint } from "react-icons/fc";
 
 function ResultPage() {
   const { id } = useParams();
@@ -9,7 +9,18 @@ function ResultPage() {
   const { data } = useSelector((state) => state.auth);
   const { exams } = useSelector((state) => state.exam);
   const result = test?.testResult;
-  console.log(result);
+  const userAnswers = Object.values(test?.testResult?.selectedOptions);
+  console.log(userAnswers);
+  console.log(test?.testResult?.answeredQuestions.length);
+  const answersArray = new Array(test?.testData?.questions?.length);
+  answersArray.fill(undefined);
+  for (let i = 0; i < test?.testResult?.answeredQuestions.length; i++) {
+    answersArray[test?.testResult?.answeredQuestions[i]] =
+      test?.testResult?.selectedOptions[i];
+  }
+
+  console.log(answersArray);
+
   return (
     <div className="mt-[70px] w-full p-3 md:p-10 bg-[#fbfcfc]">
       <div className="flex flex-col w-full h-full p-2 md:p-10 bg-white shadow-md gap-5">
@@ -106,7 +117,7 @@ function ResultPage() {
                       </td>
 
                       <td className="whitespace-nowrap px-6 py-4">
-                        {result.marked}
+                        {result.wrong}
                       </td>
                     </tr>
                     <tr>
@@ -120,12 +131,48 @@ function ResultPage() {
                 {/* print result */}
                 <div className="flex w-full justify-end">
                   <p>Print Result</p>
-                <button onClick={()=>{window.print()}}><FcPrint size={32}/></button>
+                  <button
+                    onClick={() => {
+                      window.print();
+                    }}
+                  >
+                    <FcPrint size={32} />
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
+      <h1 className="mt-10 text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl dark:text-white">
+        Answer Key
+      </h1>
+      <div className="flex">
+        <ol className="list-decimal">
+          {test?.testData?.questions?.map((question, index) => {
+            return (
+              <>
+                <li key={question._id}>
+                  <h1 className="font-semibold">{question.question_title}</h1>
+                  <ol className="list-decimal">
+                    {question?.options?.map((option) => {
+                      return (
+                        <li className="ml-5" key={option._id}>
+                          {option.option_title}
+                        </li>
+                      );
+                    })}
+                  </ol>
+                </li>
+                <p>
+                  Your Answer :{" "}
+                  {answersArray[index] ? answersArray[index] : "Not Answered"}
+                </p>
+                <p>Rigth Answer : {question.answer.answer_title}</p>
+              </>
+            );
+          })}
+        </ol>
       </div>
     </div>
   );
