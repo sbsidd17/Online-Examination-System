@@ -143,12 +143,12 @@ function ResultPage() {
       <h1 className="mt-10 text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl dark:text-white">
         Answer Key
       </h1>
-      <div className="flex p-20 mt-[70px]">
+      <div className="flex p-5 md:p-20">
         <ol className="list-decimal">
           {test?.testData?.questions?.map((question, index) => {
             return (
-              <>
-                <li key={question._id}>
+              <div key={question._id}>
+                <li className="mt-5" >
                   <h1 className="font-semibold">{question.question_title}</h1>
                   <ol className="list-decimal">
                     {question?.options?.map((option) => {
@@ -165,7 +165,7 @@ function ResultPage() {
                   {answersArray[index] ? answersArray[index] : "Not Answered"}
                 </p>
                 <p>Rigth Answer : {question.answer.answer_title}</p>
-              </>
+              </div>
             );
           })}
         </ol>
