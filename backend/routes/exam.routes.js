@@ -10,8 +10,8 @@ import { isAdmin, isApproved, isInstructor } from "../middlewares/role.middlewar
 const examRoute = express.Router()
 
 // Category Routes
-examRoute.post("/create-category", auth, isAdmin, createCategory)
-examRoute.post("/edit-category", auth, isAdmin, editCategory)
+examRoute.post("/create-category", auth, isAdmin, uploadSingle, createCategory)
+examRoute.post("/edit-category", auth, isAdmin, uploadSingle, editCategory)
 examRoute.post("/delete-category", auth, isAdmin, deleteCategory)
 examRoute.get("/all-categories", showAllCategory)
 examRoute.get("/get-category/:id", getCategory)

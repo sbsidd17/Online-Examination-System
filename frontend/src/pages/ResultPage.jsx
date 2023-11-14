@@ -10,16 +10,12 @@ function ResultPage() {
   const { exams } = useSelector((state) => state.exam);
   const result = test?.testResult;
   const userAnswers = Object.values(test?.testResult?.selectedOptions);
-  console.log(userAnswers);
-  console.log(test?.testResult?.answeredQuestions.length);
   const answersArray = new Array(test?.testData?.questions?.length);
   answersArray.fill(undefined);
-  for (let i = 0; i < test?.testResult?.answeredQuestions.length; i++) {
-    answersArray[test?.testResult?.answeredQuestions[i]] =
-      test?.testResult?.selectedOptions[i];
+  for (let i = 0; i < userAnswers.length; i++) {
+    answersArray[test?.testResult?.answeredQuestions[i]] = userAnswers[i]
   }
 
-  console.log(answersArray);
 
   return (
     <div className="mt-[70px] w-full p-3 md:p-10 bg-[#fbfcfc]">
@@ -147,7 +143,7 @@ function ResultPage() {
       <h1 className="mt-10 text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl dark:text-white">
         Answer Key
       </h1>
-      <div className="flex">
+      <div className="flex p-20 mt-[70px]">
         <ol className="list-decimal">
           {test?.testData?.questions?.map((question, index) => {
             return (

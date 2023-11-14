@@ -1,11 +1,13 @@
+import cloudinary from "../config/cloudinary.js";
 import Category from "../models/category.model.js";
+import fs from "fs";
 
 const createCategory = async (req, res) => {
   // get data from body
-  const { category_name, category_description, category_image } = req.body;
+  let { category_name, category_description, category_image } = req.body;
 
   // validation
-  if (!category_name || !category_description || !category_image) {
+  if (!category_name || !category_description) {
     return res.status(401).json({
       success: "false",
       msg: "All Fields Are Required",
@@ -15,7 +17,7 @@ const createCategory = async (req, res) => {
   // take image and upload it to cloudnary
   try {
     const cloudinaryResponse = await cloudinary.uploader.upload(req.file.path, {
-      transformation: [{ width: 320, height: 180, crop: "fill" }],
+      transformation: [{ width: 150, height: 150, crop: "fill" }],
     });
 
     category_image = cloudinaryResponse.secure_url;
@@ -97,13 +99,39 @@ const getCategory = async (req, res) => {
 
 const editCategory = async (req, res) => {
   // get data from body
-  const { category_name, category_description, category_id } = req.body;
+  let { category_name, category_description, category_id, category_image } = req.body;
+
+  if (req.file) {
+    try {
+      const cloudinaryResponse = await cloudinary.uploader.upload(
+        req.file.path,
+        {
+          transformation: [{ width: 150, height: 150, crop: "fill" }],
+        }
+      );
+
+      category_image = cloudinaryResponse.secure_url;
+
+      // Delete file from server after upload to cloudinary
+      fs.unlink(req.file.path, (err) => {
+        if (err) {
+          return console.error("Error deleting file:", err);
+        }
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: "false",
+        msg: "Error in uploading image",
+        error: error.message,
+      });
+    }
+  }
 
   // Update catagoty in db
   try {
     const updatedCategory = await Category.findByIdAndUpdate(
       { _id: category_id },
-      { $set: { category_name, category_description } },
+      { $set: { category_name, category_description, category_image } },
       { new: true }
     ).exec();
 

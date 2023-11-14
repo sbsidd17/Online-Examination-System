@@ -28,7 +28,7 @@ function Category() {
             <Link key={exam._id} to={`/exam/${exam._id}`} className="w-full">
               <ExamCard
                 name={exam.exam_name}
-                url="https://www.igecorner.com/wp-content/uploads/2019/03/ssc-logo.png"
+                url={categories?.curr_category?.category_image}
               />
             </Link>
           );
