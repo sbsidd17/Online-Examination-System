@@ -1,4 +1,50 @@
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { createOrder, verifyPayment } from "../redux/slices/paymentSlice";
+
 function ExplorePass() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { data } = useSelector((state) => state.auth);
+
+  async function paymentHandler(amount) {
+    const res = await dispatch(createOrder({ amount }));
+    console.log(res.payload.order);
+    let options = {
+      key: res.payload.key, // Enter the Key ID generated from the Dashboard
+      amount: res.payload.order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      currency: res.payload.order.currency,
+      name: "Gyaan Book",
+      description: "Gyaan Book Pass",
+      image:
+        "https://www.shutterstock.com/image-vector/book-people-sunrise-educational-logo-600nw-1673636527.jpg",
+      order_id: res.payload.order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      handler: async function (response) {
+        const res = await dispatch(
+          verifyPayment({
+            razorpay_payment_id: response.razorpay_payment_id,
+            order_id: response.razorpay_order_id,
+            razorpay_signature: response.razorpay_signature,
+          })
+        );
+        if(res.payload.success){
+          navigate("/")
+        }
+      },
+      prefill: {
+        name: `${data.first_name} ${data.last_name}`,
+        email: data.email,
+      },
+      notes: {
+        address: "Razorpay Corporate Office",
+      },
+      theme: {
+        color: "#0ad0f4",
+      },
+    };
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  }
   return (
     <div className="mt-[70px]">
       <div className="bg-[#f7f6f6] dark:bg-gray-900">
@@ -76,7 +122,10 @@ function ExplorePass() {
                 </li>
               </ul>
 
-              <button className="w-full px-4 py-2 mt-10 tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+              <button
+                onClick={() => paymentHandler(199)}
+                className="w-full px-4 py-2 mt-10 tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+              >
                 Start Now
               </button>
             </div>
@@ -85,7 +134,7 @@ function ExplorePass() {
               <p className="font-medium text-gray-200 uppercase">Premium</p>
 
               <h2 className="text-5xl font-bold text-white uppercase dark:text-gray-100">
-              ₹499
+                ₹499
               </h2>
 
               <p className="font-medium text-gray-200">3 Months</p>
@@ -137,7 +186,10 @@ function ExplorePass() {
                 </li>
               </ul>
 
-              <button className="w-full px-4 py-2 mt-10 tracking-wide text-blue-500 capitalize transition-colors duration-300 transform bg-white rounded-md hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:ring focus:ring-gray-200 focus:ring-opacity-80">
+              <button
+                onClick={() => paymentHandler(499)}
+                className="w-full px-4 py-2 mt-10 tracking-wide text-blue-500 capitalize transition-colors duration-300 transform bg-white rounded-md hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:ring focus:ring-gray-200 focus:ring-opacity-80"
+              >
                 Start Now
               </button>
             </div>
@@ -148,7 +200,7 @@ function ExplorePass() {
               </p>
 
               <h2 className="text-4xl font-semibold text-gray-800 uppercase dark:text-gray-100">
-              ₹999
+                ₹999
               </h2>
 
               <p className="font-medium text-gray-500 dark:text-gray-300">
@@ -202,7 +254,10 @@ function ExplorePass() {
                 </li>
               </ul>
 
-              <button className="w-full px-4 py-2 mt-10 tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+              <button
+                onClick={() => paymentHandler(999)}
+                className="w-full px-4 py-2 mt-10 tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+              >
                 Start Now
               </button>
             </div>

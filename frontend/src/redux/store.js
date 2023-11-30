@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import authSlice from "./slices/authSlice";
 import examSlice from "./slices/examSlice";
 import instructorSlice from "./slices/instructorSlice";
+import paymentSlice from "./slices/paymentSlice";
 import testSlice from "./slices/testSlice";
 
 export const store = configureStore({
@@ -10,5 +11,6 @@ export const store = configureStore({
     exam: examSlice,
     test: testSlice,
     instructor: instructorSlice,
+    payment: paymentSlice,
   },
 });

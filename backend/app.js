@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import examRoute from "./routes/exam.routes.js";
 import adminRoute from "./routes/admin.routes.js";
 import cors from "cors"
+import paymentRoute from "./routes/payment.routes.js";
 
 const app = express()
 
@@ -21,5 +22,6 @@ app.get("/",(req,res)=>{
 app.use("/api/v1/auth", userRoute)
 app.use("/api/v1/exam", examRoute)
 app.use("/api/v1/admin", adminRoute)
+app.use("/api/v1/payment", paymentRoute)
 
 export default app;

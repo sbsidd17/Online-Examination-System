@@ -10,7 +10,7 @@ import UserProfile from "../models/userProfile.model.js";
 const signUp = async (req, res) => {
   // take data from body
   const { first_name, last_name, email, password, userOtp, role } = req.body;
-  console.log(req.body)
+  // console.log(req.body)
 
   //validation
   if (!first_name || !last_name || !email || !password || !userOtp) {
@@ -70,7 +70,7 @@ const signUp = async (req, res) => {
       user,
     });
   } catch (error) {
-    console.log(error.message)
+    // console.log(error.message)
     return res.status(500).json({
       success: false,
       msg: "Something Went Wrong",
