@@ -68,8 +68,8 @@ function Home() {
             <span>Success</span>
           </div>
           <div>
-            {isLoggedIn === true ? (
-              <Link to={"/profile"}>
+            {isLoggedIn === "true" ? (
+              <Link to={"/explore-tests"}>
                 <button className="bg-green-400 px-5 py-2 text-white rounded-md hover:bg-green-500">
                   Explore Test Series
                 </button>
@@ -110,7 +110,7 @@ function Home() {
 
         {/* section */}
         <div className="w-full flex flex-col gap-5">
-          <div className="text-2xl font-semibold">Popular Exams</div>
+          <div className="text-2xl font-semibold">Categories</div>
           {/* categories */}
           <div className="flex items-center gap-5 rounded-md bg-white p-5 shadow-sm overflow-x-auto">
             {categories.allCategories?.map((category) => {

@@ -1,5 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Category from "../components/Category";
+import AboutPage from "../pages/AboutPage";
+import ContactUsPage from "../pages/ContactUsPage";
 import Dashboard from "../pages/Dashboard";
 import ForgotPassword from "../pages/ForgotPassword";
 import Home from "../pages/Home";
@@ -20,6 +22,8 @@ function UserRoutes() {
       <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="/contact" element={<ContactUsPage />} />
     </Routes>
   );
 }
