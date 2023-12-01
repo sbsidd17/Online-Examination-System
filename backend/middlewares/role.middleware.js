@@ -46,4 +46,16 @@ const isAdmin = (req, res, next) => {
   next();
 };
 
-export { isStudent, isInstructor, isApproved, isAdmin };
+const hasPass = (req, res, next) => {
+  const pass = req.user.hasPass;
+
+  if (!pass) {
+    return res.status(401).json({
+      success: "false",
+      msg: "Buy Any Pass First",
+    });
+  }
+  next();
+};
+
+export { isStudent, isInstructor, isApproved, isAdmin, hasPass };

@@ -5,7 +5,7 @@ import { createAnswer, createOption, createQuestion, deleteAnswer, deleteOption,
 import { createTest, deleteTest, editTest, getTestData, showAllTests } from "../controllers/test.controller.js";
 import { auth } from "../middlewares/auth.middleware.js";
 import uploadSingle from "../middlewares/multer.js";
-import { isAdmin, isApproved, isInstructor } from "../middlewares/role.middleware.js";
+import { hasPass, isAdmin, isApproved, isInstructor } from "../middlewares/role.middleware.js";
 
 const examRoute = express.Router()
 
@@ -29,7 +29,7 @@ examRoute.post("/create-test", auth, isInstructor, isApproved, createTest)
 examRoute.post("/delete-test", auth, isInstructor, isApproved, deleteTest)
 examRoute.post("/edit-test", auth, isInstructor, isApproved, editTest)
 examRoute.get("/all-tests", showAllTests)
-examRoute.get("/get-test-data/:id", auth, getTestData)
+examRoute.get("/get-test-data/:id", auth, hasPass, getTestData)
 
 //Question Routes
 examRoute.post("/create-question", auth, isInstructor, isApproved, uploadSingle, createQuestion)

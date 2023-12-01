@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 function TestCard({ test }) {
   const { isLoggedIn, hasPass } = useSelector((state) => state.auth);
+  // console.log("hasPass:", hasPass, typeof hasPass);
   return (
     // main div
     <div className="flex justify-between items-center bg-white w-full shadow-md p-5 md:px-20">
@@ -31,7 +32,7 @@ function TestCard({ test }) {
       <div className="flex justify-normal items-center">
         {isLoggedIn ? (
           <div>
-            {hasPass ? (
+            {hasPass == true ? (
               <Link to={`/start-test/${test._id}`} className="w-full">
                 <button className="w-full bg-[#0ad0f4] text-white px-5 py-2 rounded-md transition-all duration-200 hover:bg-[#12c1e0] hover:scale-95">
                   Start Now
