@@ -69,7 +69,7 @@ function Home() {
           </div>
           <div>
             {isLoggedIn === "true" ? (
-              <Link to={"/explore-tests"}>
+              <Link to={"/explore-exams"}>
                 <button className="bg-green-400 px-5 py-2 text-white rounded-md hover:bg-green-500">
                   Explore Test Series
                 </button>

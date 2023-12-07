@@ -5,6 +5,7 @@ import CreateTest from "../pages/CreateTest";
 import EditExam from "../pages/editExam";
 import EditTest from "../pages/EditTest";
 import Exam from "../pages/Exam";
+import ExploreExams from "../pages/ExploreExams";
 import ExplorePass from "../pages/ExplorePass";
 import InstructorDashboard from "../pages/InstructorDashboard";
 import ResultPage from "../pages/ResultPage";
@@ -22,6 +23,7 @@ function ExamsRoutes() {
         <Route path="/edit-exam/:id" element={<EditExam />} />
         <Route path="/create-test/:id" element={<CreateTest />} />
         <Route path="/edit-test/:id" element={<EditTest />} />
+        <Route path="/explore-exams" element={<ExploreExams />} />
         <Route path="/explore-pass" element={<ExplorePass />} />
       </Routes>
     </>
