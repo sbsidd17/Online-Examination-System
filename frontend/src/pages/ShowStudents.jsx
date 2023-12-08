@@ -46,9 +46,9 @@ function ShowStudents() {
                 </td>
                 <td>{student.email}</td>
                 <td>
-                  {student.hasPass ? <div>Active</div> : <div>Inactive</div>}
+                  {student.hasPass ? <div className="bg-green-500 text-white p-1 text-center">Active</div> : <div className="bg-red-500 text-white p-1 text-center">Inactive</div>}
                 </td>
-                <td>
+                <td className="text-center">
                   <FcFullTrash
                     className="hover:cursor-pointer"
                     size={28}
