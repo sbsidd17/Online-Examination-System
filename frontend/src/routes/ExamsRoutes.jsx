@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import CreateExam from "../pages/CreateExam";
-import CreateQuestion from "../pages/CreateQuestion";
 import CreateTest from "../pages/CreateTest";
 import EditExam from "../pages/editExam";
 import EditTest from "../pages/EditTest";

@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import adminSlice from "./slices/adminSlice";
 import authSlice from "./slices/authSlice";
 import examSlice from "./slices/examSlice";
 import instructorSlice from "./slices/instructorSlice";
@@ -12,5 +13,6 @@ export const store = configureStore({
     test: testSlice,
     instructor: instructorSlice,
     payment: paymentSlice,
+    admin: adminSlice
   },
 });

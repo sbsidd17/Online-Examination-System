@@ -37,7 +37,7 @@ const deleteStudent = async (req, res) => {
     // return response
     return res.status(200).json({
       success: "true",
-      msg: "Got All Successfully",
+      msg: "Deleted Successfully",
     });
   } catch (error) {
     return res.status(500).json({
@@ -90,4 +90,28 @@ const approveInstructor = async (req, res)=>{
   }
 }
 
-export { viewAllStudents, deleteStudent, viewAllInstructors, approveInstructor };
+const unApproveInstructor = async (req, res)=>{
+    const {id} = req.params
+    // trycatch
+  try {
+    const instructor = await User.findByIdAndUpdate({_id:id},
+        {
+            $set : {approved:false}
+        },{new:true}
+        ).exec()
+    // return response
+    return res.status(200).json({
+      success: "true",
+      msg: "Instructor UnApproved Successfully",
+      instructor
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: "false",
+      msg: "Something Went Wrong",
+      error: error.message,
+    });
+  }
+}
+
+export { viewAllStudents, deleteStudent, viewAllInstructors, approveInstructor, unApproveInstructor };

@@ -1,4 +1,5 @@
 
+import AdminRoutes from './AdminRoutes'
 import ExamsRoutes from './ExamsRoutes'
 import UserRoutes from './UserRoutes'
 
@@ -7,6 +8,7 @@ function AllRoutes() {
     <>
       <UserRoutes />
       <ExamsRoutes />
+      <AdminRoutes />
     </>
   )
 }
