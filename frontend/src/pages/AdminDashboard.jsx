@@ -46,7 +46,7 @@ function AdminDashboard() {
 
   // console.log(examsData);
   return (
-    <div className="mt-[70px] w-full min-h-[calc(100vh-70px)] bg-gray-100 p-5 md:p-20">
+    <div className="mt-[70px] w-full min-h-[calc(100vh-70px)] bg-gray-100 p-5 md:px-20">
       <div className="flex flex-col gap-10">
         {/* heading */}
         <div className="w-full flex justify-center items-center text-2xl bg-white shadow-md rounded-md p-5 gap-2">
