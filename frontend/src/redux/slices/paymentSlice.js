@@ -21,6 +21,7 @@ export const createOrder = createAsyncThunk("payment/create-order", async (data)
 
     return (await response).data;
   } catch (error) {
+    toast.error(error?.response?.data?.msg)
     throw error.message; // Handle and return a specific error message
   }
 });
@@ -39,6 +40,7 @@ export const verifyPayment = createAsyncThunk("payment/verify", async (data) => 
 
     return (await response).data;
   } catch (error) {
+    toast.error(error?.response?.data?.msg)
     throw error.message; // Handle and return a specific error message
   }
 });

@@ -21,6 +21,7 @@ export const getExamsByInstructor = createAsyncThunk(
         // console.log(await response);
         return (await response).data;
       } catch (error) {
+        toast.error(error?.response?.data?.msg)
         throw error.message; // Handle and return a specific error message
       }
     }
@@ -41,6 +42,7 @@ export const createExam = createAsyncThunk(
       });
       return (await response).data;
     } catch (error) {
+      toast.error(error?.response?.data?.msg)
       throw error.message; // Handle and return a specific error message
     }
   }
@@ -59,6 +61,7 @@ export const editExam = createAsyncThunk("/exam/edit-exam", async (data) => {
     console.log(await response);
     return (await response).data;
   } catch (error) {
+    toast.error(error?.response?.data?.msg)
     throw error.message; // Handle and return a specific error message
   }
 });
@@ -78,6 +81,7 @@ export const deleteExam = createAsyncThunk(
       console.log(await response);
       return (await response).data;
     } catch (error) {
+      toast.error(error?.response?.data?.msg)
       throw error.message; // Handle and return a specific error message
     }
   }
@@ -98,6 +102,7 @@ export const createTest = createAsyncThunk(
       // console.log(await response)
       return (await response).data;
     } catch (error) {
+      toast.error(error?.response?.data?.msg)
       throw error.message; // Handle and return a specific error message
     }
   }
@@ -117,6 +122,7 @@ export const editTest = createAsyncThunk("/exam/edit-test", async (data) => {
     // console.log(await response)
     return (await response).data;
   } catch (error) {
+    toast.error(error?.response?.data?.msg)
     throw error.message; // Handle and return a specific error message
   }
 });
@@ -136,6 +142,7 @@ export const deleteTest = createAsyncThunk(
       // console.log(await response)
       return (await response).data;
     } catch (error) {
+      toast.error(error?.response?.data?.msg)
       throw error.message; // Handle and return a specific error message
     }
   }
@@ -156,6 +163,7 @@ export const createQuestion = createAsyncThunk(
       // console.log(await response)
       return (await response).data;
     } catch (error) {
+      toast.error(error?.response?.data?.msg)
       throw error.message; // Handle and return a specific error message
     }
   }
@@ -176,6 +184,7 @@ export const editQuestion = createAsyncThunk(
       // console.log(await response)
       return (await response).data;
     } catch (error) {
+      toast.error(error?.response?.data?.msg)
       throw error.message; // Handle and return a specific error message
     }
   }
@@ -196,6 +205,7 @@ export const deleteQuestion = createAsyncThunk(
       // console.log(await response)
       return (await response).data;
     } catch (error) {
+      toast.error(error?.response?.data?.msg)
       throw error.message; // Handle and return a specific error message
     }
   }
@@ -216,6 +226,7 @@ export const createOption = createAsyncThunk(
       // console.log(await response)
       return (await response).data;
     } catch (error) {
+      toast.error(error?.response?.data?.msg)
       throw error.message; // Handle and return a specific error message
     }
   }
@@ -236,6 +247,7 @@ export const editOption = createAsyncThunk(
       // console.log(await response)
       return (await response).data;
     } catch (error) {
+      toast.error(error?.response?.data?.msg)
       throw error.message; // Handle and return a specific error message
     }
   }
@@ -256,6 +268,7 @@ export const deleteOption = createAsyncThunk(
       // console.log(await response)
       return (await response).data;
     } catch (error) {
+      toast.error(error?.response?.data?.msg)
       throw error.message; // Handle and return a specific error message
     }
   }
@@ -276,6 +289,7 @@ export const createAnswer = createAsyncThunk(
       // console.log(await response)
       return (await response).data;
     } catch (error) {
+      toast.error(error?.response?.data?.msg)
       throw error.message; // Handle and return a specific error message
     }
   }
@@ -296,6 +310,7 @@ export const editAnswer = createAsyncThunk(
       // console.log(await response)
       return (await response).data;
     } catch (error) {
+      toast.error(error?.response?.data?.msg)
       throw error.message; // Handle and return a specific error message
     }
   }
@@ -316,6 +331,7 @@ export const deleteAnswer = createAsyncThunk(
       // console.log(await response)
       return (await response).data;
     } catch (error) {
+      toast.error(error?.response?.data?.msg)
       throw error.message; // Handle and return a specific error message
     }
   }

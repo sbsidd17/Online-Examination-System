@@ -24,6 +24,7 @@ export const signup = createAsyncThunk("auth/signUp", async (data) => {
 
     return await response.data;
   } catch (error) {
+    toast.error(error?.response?.data?.msg)
     throw error.message; // Handle and return a specific error message
   }
 });
@@ -42,6 +43,7 @@ export const login = createAsyncThunk("/auth/login", async (data) => {
     });
     return (await res).data;
   } catch (error) {
+    toast.error(error?.response?.data?.msg)
     // console.log(error.response)
     toast.error(error?.response?.data?.msg);
     throw error;
@@ -62,6 +64,7 @@ export const logout = createAsyncThunk("/auth/logout", async () => {
     });
     return (await res).data;
   } catch (error) {
+    
     toast.error(error?.response?.data?.msg);
     throw error;
   }
@@ -83,6 +86,7 @@ export const forgotPassword = createAsyncThunk(
       });
       return (await res).data;
     } catch (error) {
+     
       toast.error(error?.response?.data?.msg);
       throw error;
     }
@@ -105,6 +109,7 @@ export const resetPassword = createAsyncThunk(
       });
       return (await res).data;
     } catch (error) {
+      
       toast.error(error?.response?.data?.msg);
       throw error;
     }
@@ -127,6 +132,7 @@ export const updateProfile = createAsyncThunk(
       });
       return (await res).data;
     } catch (error) {
+      
       // console.log(error.response)
       toast.error(error?.response?.data?.msg);
       throw error;

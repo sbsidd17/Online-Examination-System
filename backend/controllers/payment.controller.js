@@ -66,3 +66,22 @@ export const verifySignature = async (req, res) => {
     msg: "Payment Failed",
   });
 };
+
+
+export const allPayments = async (req, res, next) => {
+  try {
+      const { count } = req.query;
+
+      const subscriptions = await razorpayInstance.orders.all({
+          count: count || 10,
+      });
+
+      res.status(200).json({
+          success: true,
+          message: 'All Payments',
+          allPayments: subscriptions
+      });
+  } catch (e) {
+      return next(new AppError(e.message, 500));
+  }
+};

@@ -10,7 +10,6 @@ import {
 } from "../redux/slices/adminSlice";
 
 function ShowInstructors() {
-  const [instructorsData, setInstructorsData] = useState();
   const dispatch = useDispatch();
   const { allInstructors } = useSelector((state) => state.admin);
 
@@ -21,11 +20,6 @@ function ShowInstructors() {
     getData();
   }, []);
 
-  useEffect(() => {
-    if (allInstructors) {
-      setInstructorsData(allInstructors);
-    }
-  }, [allInstructors]);
   return (
     <div className="w-full">
       <table className="w-full border-separate border-spacing-2 border bg-white">
@@ -39,7 +33,7 @@ function ShowInstructors() {
           </tr>
         </thead>
         <tbody>
-          {instructorsData?.map((instructor, index) => {
+          {allInstructors?.map((instructor, index) => {
             return (
               <tr key={instructor._id}>
                 <td>{index + 1}</td>
@@ -65,7 +59,7 @@ function ShowInstructors() {
                     <button
                       onClick={() => {
                         dispatch(unapproveInstructor(instructor._id));
-                        window.location.reload()
+                        getData();
                       }}
                       className="flex justify-start items-center gap-2 rounded-md bg-red-200 hover:bg-red-300 p-1"
                     >
@@ -76,7 +70,7 @@ function ShowInstructors() {
                     <button
                       onClick={() => {
                         dispatch(approveInstructor(instructor._id));
-                        window.location.reload()
+                        getData();
                       }}
                       className="flex justify-start items-center gap-2 rounded-md bg-green-200 hover:bg-green-300 p-1"
                     >

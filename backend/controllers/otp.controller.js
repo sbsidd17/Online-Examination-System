@@ -24,17 +24,14 @@ const sendOTP = async (req, res) => {
     });
 
     //Send OTP on User Email
-    const message = sendOtpTemplate(generatedOtp)
-    await sendEmail(email, "OTP for SignUp", message)
+    const message = sendOtpTemplate(generatedOtp);
+    await sendEmail(email, "OTP for SignUp", message);
     //Return response
     return res.status(200).json({
       success: true,
       msg: "OTP sent Successfully.",
       otp,
     });
-
-    
-    
   } catch (error) {
     return res.status(500).json({
       success: false,

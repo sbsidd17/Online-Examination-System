@@ -34,10 +34,15 @@ const deleteStudent = async (req, res) => {
     }
 
     await User.findByIdAndDelete({ _id: id });
+
+    //get remaning students
+    const allStudents = await User.find({ role: "Student" });
+    
     // return response
     return res.status(200).json({
       success: "true",
       msg: "Deleted Successfully",
+      allStudents
     });
   } catch (error) {
     return res.status(500).json({

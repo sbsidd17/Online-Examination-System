@@ -23,6 +23,7 @@ export const getQuestionData = createAsyncThunk("/exam/get-question-data/", asyn
       // console.log(await response)
       return (await response).data;
     } catch (error) {
+      toast.error(error?.response?.data?.msg)
       throw error.message; // Handle and return a specific error message
     }
   });
@@ -40,6 +41,7 @@ export const getTestData = createAsyncThunk("/exam/get-test-data", async (id) =>
         // console.log(await response)
         return (await response).data;
       } catch (error) {
+        toast.error(error?.response?.data?.msg)
         throw error.message; // Handle and return a specific error message
       }
     });
