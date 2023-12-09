@@ -33,8 +33,7 @@ export const createOrder = async (req, res) => {
 };
 
 export const verifySignature = async (req, res) => {
-  const {order_id, razorpay_payment_id, razorpay_signature } =
-    req.body;
+  const { order_id, razorpay_payment_id, razorpay_signature } = req.body;
   const data = order_id + "|" + razorpay_payment_id;
   const generated_signature = crypto
     .createHmac("sha256", process.env.RAZORPAY_SECRATE)
@@ -42,8 +41,7 @@ export const verifySignature = async (req, res) => {
     .digest("hex");
 
   if (generated_signature == razorpay_signature) {
-
-    const user_id = req.user.id
+    const user_id = req.user.id;
     // find user and update
     await User.findByIdAndUpdate(
       { _id: user_id },
@@ -67,21 +65,24 @@ export const verifySignature = async (req, res) => {
   });
 };
 
-
 export const allPayments = async (req, res, next) => {
   try {
-      const { count } = req.query;
+    const { count } = req.query;
 
-      const subscriptions = await razorpayInstance.orders.all({
-          count: count || 10,
-      });
+    const subscriptions = await razorpayInstance.orders.all({
+      count: count || 10,
+    });
 
-      res.status(200).json({
-          success: true,
-          message: 'All Payments',
-          allPayments: subscriptions
-      });
-  } catch (e) {
-      return next(new AppError(e.message, 500));
+    res.status(200).json({
+      success: true,
+      message: "All Payments",
+      allPayments: subscriptions,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: "false",
+      msg: "Something Went Wrong",
+      error: error.message,
+    });
   }
 };
