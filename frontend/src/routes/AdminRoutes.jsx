@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import AdminDashboard from "../pages/AdminDashboard";
 import ShowExams from "../pages/ShowExams";
 import ShowInstructors from "../pages/ShowInstructors";
+import ShowPayments from "../pages/ShowPayments";
 import ShowStudents from "../pages/ShowStudents";
 
 
@@ -13,6 +14,7 @@ function AdminRoutes() {
         <Route path="/admin-dashboard/all-exams" element={<ShowExams />} />
         <Route path="/admin-dashboard/all-students" element={<ShowStudents />} />
         <Route path="/admin-dashboard/all-instructors" element={<ShowInstructors />} />
+        <Route path="/admin-dashboard/all-payments" element={<ShowPayments />} />
         </Route>
       </Routes>
     </>

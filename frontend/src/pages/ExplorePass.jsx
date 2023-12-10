@@ -8,7 +8,7 @@ function ExplorePass() {
   const { data } = useSelector((state) => state.auth);
 
   async function paymentHandler(amount) {
-    const res = await dispatch(createOrder({ amount }));
+    const res = await dispatch(createOrder({ amount, email:data.email }));
     console.log(res.payload.order);
     let options = {
       key: res.payload.key, // Enter the Key ID generated from the Dashboard

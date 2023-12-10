@@ -6,6 +6,6 @@ const paymentRoute = express.Router();
 
 paymentRoute.post("/create-order", auth, createOrder);
 paymentRoute.post("/verify", auth, verifySignature);
-paymentRoute.post("/allPayment", auth, allPayments);
+paymentRoute.get("/allPayment", auth, allPayments);
 
 export default paymentRoute;

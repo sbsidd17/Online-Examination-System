@@ -35,7 +35,7 @@ function ShowInstructors() {
         <tbody>
           {allInstructors?.map((instructor, index) => {
             return (
-              <tr key={instructor._id}>
+              <tr key={instructor._id} className="hover:shadow-md hover:bg-slate-100 transition-all duration-500 ease-in-out">
                 <td>{index + 1}</td>
                 <td>
                   {instructor.first_name} {instructor.last_name}

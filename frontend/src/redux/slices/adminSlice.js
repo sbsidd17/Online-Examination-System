@@ -5,6 +5,10 @@ import axiosInstance from "../../config/axiosInstance";
 const initialState = {
   allStudents: [],
   allInstructors: [],
+  allPayments: {
+    all_data: {},
+    total_amount: 0
+  }
 };
 
 export const getAllStudents = createAsyncThunk(
@@ -112,6 +116,27 @@ export const deleteStudent = createAsyncThunk(
   }
 );
 
+export const getAllPayment = createAsyncThunk(
+  "/payment/allPayment",
+  async () => {
+    try {
+      const response = axiosInstance.get(`/payment/allPayment?count=100`);
+      toast.promise(response, {
+        loading: "Wait! Geting Details...",
+        success: (data) => {
+          return data?.data?.msg;
+        },
+        error: "Failed to Load",
+      });
+      // console.log(await response)
+      return (await response).data;
+    } catch (error) {
+      toast.error(error?.response?.data?.msg);
+      throw error.message; // Handle and return a specific error message
+    }
+  }
+);
+
 const adminSlice = createSlice({
   name: "adminSlice",
   initialState,
@@ -126,6 +151,11 @@ const adminSlice = createSlice({
       })
       .addCase(deleteStudent.fulfilled, (state, action) => {
         state.allStudents = action.payload.allStudents;
+      })
+      .addCase(getAllPayment.fulfilled, (state, action) => {
+        const total_amount = action.payload.allPayments.items.reduce((acc, curr)=>acc + curr.amount, 0)
+        state.allPayments.all_data = action.payload;
+        state.allPayments.total_amount = total_amount
       })
   },
 });
