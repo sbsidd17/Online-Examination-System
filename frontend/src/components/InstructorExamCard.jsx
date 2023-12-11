@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { deleteExam } from "../redux/slices/instructorSlice";
 import {GoAlert} from "react-icons/go"
 
-function InstructorExamCard({ exam }) {
+function InstructorExamCard({ exam, getExamData }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -26,7 +26,7 @@ function InstructorExamCard({ exam }) {
     }))
     if(res.payload.success){
       document.getElementById(`${exam._id}`).classList.add("hidden")
-      window.location.reload()
+      getExamData()
     }
     
   }

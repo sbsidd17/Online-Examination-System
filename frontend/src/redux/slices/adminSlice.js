@@ -8,7 +8,8 @@ const initialState = {
   allPayments: {
     all_data: {},
     total_amount: 0
-  }
+  },
+  sliderImages: []
 };
 
 export const getAllStudents = createAsyncThunk(
@@ -24,7 +25,8 @@ export const getAllStudents = createAsyncThunk(
         error: "Failed to load Data",
       });
       // console.log(await response)
-      return (await response).data;
+      const rsp = await response;
+      return rsp.data;
     } catch (error) {
       toast.error(error?.response?.data?.msg);
       throw error.message; // Handle and return a specific error message
@@ -45,7 +47,8 @@ export const getAllInstructors = createAsyncThunk(
         error: "Failed to load Data",
       });
       // console.log(await response)
-      return (await response).data;
+      const rsp = await response;
+      return rsp.data;
     } catch (error) {
       toast.error(error?.response?.data?.msg);
       throw error.message; // Handle and return a specific error message
@@ -66,7 +69,8 @@ export const approveInstructor = createAsyncThunk(
         error: "Failed to Approve",
       });
       // console.log(await response)
-      return (await response).data;
+      const rsp = await response;
+      return rsp.data;
     } catch (error) {
       toast.error(error?.response?.data?.msg);
       throw error.message; // Handle and return a specific error message
@@ -87,7 +91,8 @@ export const unapproveInstructor = createAsyncThunk(
         error: "Failed to UnApprove",
       });
       // console.log(await response)
-      return (await response).data;
+      const rsp = await response;
+      return rsp.data;
     } catch (error) {
       toast.error(error?.response?.data?.msg);
       throw error.message; // Handle and return a specific error message
@@ -108,7 +113,8 @@ export const deleteStudent = createAsyncThunk(
         error: "Failed to Delete",
       });
       // console.log(await response)
-      return (await response).data;
+      const rsp = await response;
+      return rsp.data;
     } catch (error) {
       toast.error(error?.response?.data?.msg);
       throw error.message; // Handle and return a specific error message
@@ -129,6 +135,28 @@ export const getAllPayment = createAsyncThunk(
         error: "Failed to Load",
       });
       // console.log(await response)
+      const rsp = await response;
+      return rsp.data;
+    } catch (error) {
+      toast.error(error?.response?.data?.msg);
+      throw error.message; // Handle and return a specific error message
+    }
+  }
+);
+
+export const getAllSliderImage = createAsyncThunk(
+  "/admin/getall-slider-image",
+  async () => {
+    try {
+      const response = axiosInstance.get(`/admin/getall-slider-image`);
+      toast.promise(response, {
+        loading: "Wait! Geting Data...",
+        success: (data) => {
+          return data?.data?.msg;
+        },
+        error: "Failed to Load",
+      });
+      // console.log(await response)
       return (await response).data;
     } catch (error) {
       toast.error(error?.response?.data?.msg);
@@ -136,6 +164,7 @@ export const getAllPayment = createAsyncThunk(
     }
   }
 );
+
 
 const adminSlice = createSlice({
   name: "adminSlice",
@@ -149,13 +178,13 @@ const adminSlice = createSlice({
       .addCase(getAllInstructors.fulfilled, (state, action) => {
         state.allInstructors = action.payload.allInstructors;
       })
-      .addCase(deleteStudent.fulfilled, (state, action) => {
-        state.allStudents = action.payload.allStudents;
-      })
       .addCase(getAllPayment.fulfilled, (state, action) => {
         const total_amount = action.payload.allPayments.items.reduce((acc, curr)=>acc + curr.amount, 0)
         state.allPayments.all_data = action.payload;
         state.allPayments.total_amount = total_amount
+      })
+      .addCase(getAllSliderImage.fulfilled, (state, action) => {
+        state.sliderImages = action.payload.sliderImages;
       })
   },
 });

@@ -3,7 +3,7 @@ import React from 'react'
 
 function AdminDashboardCard({icon, title, total}) {
   return (
-    <div className='flex justify-between items-center w-[300px] rounded-md shadow-md py-5 px-10 bg-[#0ad0f4]'>
+    <div className='flex justify-between items-center w-[300px]  md:w-[450px] rounded-md shadow-md py-5 px-10 bg-[#0ad0f4]'>
         {/* left */}
       <div className="flex justify-center items-center">
         {icon}

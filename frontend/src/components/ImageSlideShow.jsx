@@ -1,26 +1,33 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
+import { getAllSliderImage } from "../redux/slices/adminSlice";
 
 const ImageSlideShow = () => {
-  const images = [
-    "https://cdn.testbook.com/resources/productionimages/Group%2022_All_1678797043.png",
-    "https://exambook.co/assets/images/slides/hdr-2.jpg",
-    "https://exambook.co/assets/images/slides/hdr-2.jpg",
-  ];
+  const { sliderImages } = useSelector((state) => state.admin);
+  const dispatch = useDispatch();
+
+  async function getData() {
+    await dispatch(getAllSliderImage());
+  }
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <div>
       <Slide>
-      <div className="each-slide-effect">
-        <div style={{ backgroundImage: `url(${images[0]})` }}></div>
-      </div>
-      <div className="each-slide-effect">
-        <div style={{ backgroundImage: `url(${images[1]})` }}></div>
-      </div>
-      <div className="each-slide-effect">
-        <div style={{ backgroundImage: `url(${images[2]})` }}></div>
-      </div>
-    </Slide>
+        {sliderImages.map((image) => {
+          return (
+            <div key={image._id} className="each-slide-effect">
+              <div style={{ backgroundImage: `url(${image.image})` }}></div>
+            </div>
+          );
+        })}
+      </Slide>
     </div>
   );
 };

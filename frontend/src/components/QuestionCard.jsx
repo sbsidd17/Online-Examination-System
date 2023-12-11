@@ -6,14 +6,16 @@ import { RiDeleteBin2Line } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { deleteQuestion } from "../redux/slices/instructorSlice";
 
-function QuestionCard({ data, test_id }) {
+function QuestionCard({ data, test_id, getData }) {
   const [openViewQuestion, setOpenViewQuestion] = useState(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  async function deleteQuestionHandler(){
-    const res = await dispatch(deleteQuestion({question_id:data._id, test_id}))
-    if(res.payload.success){
-        window.location.reload()
+  async function deleteQuestionHandler() {
+    const res = await dispatch(
+      deleteQuestion({ question_id: data._id, test_id })
+    );
+    if (res.payload.success) {
+      getData();
     }
   }
   return (
@@ -27,9 +29,7 @@ function QuestionCard({ data, test_id }) {
           >
             <GrView size={22} />
           </button>
-          <button className="cursor-pointer"
-          onClick={deleteQuestionHandler}
-          >
+          <button className="cursor-pointer" onClick={deleteQuestionHandler}>
             <RiDeleteBin2Line size={22} />
           </button>
         </div>

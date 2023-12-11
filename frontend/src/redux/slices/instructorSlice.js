@@ -3,30 +3,32 @@ import toast from "react-hot-toast";
 import axiosInstance from "../../config/axiosInstance";
 
 const initialState = {
-  instructorExams: []
+  instructorExams: [],
 };
 
 export const getExamsByInstructor = createAsyncThunk(
-    "/get-exam-by-instructor",
-    async (instructor_id) => {
-      try {
-        const response = axiosInstance.get(`/exam/get-exam-by-instructor/${instructor_id}`);
-        toast.promise(response, {
-          loading: "Wait! Loading Exam",
-          success: (data) => {
-            return data?.data?.msg;
-          },
-          error: "Failed to load exam",
-        });
-        // console.log(await response);
-        return (await response).data;
-      } catch (error) {
-        toast.error(error?.response?.data?.msg)
-        throw error.message; // Handle and return a specific error message
-      }
+  "/get-exam-by-instructor",
+  async (instructor_id) => {
+    try {
+      const response = axiosInstance.get(
+        `/exam/get-exam-by-instructor/${instructor_id}`
+      );
+      toast.promise(response, {
+        loading: "Wait! Loading Exam",
+        success: (data) => {
+          return data?.data?.msg;
+        },
+        error: "Failed to load exam",
+      });
+      // console.log(await response);
+      const rsp = await response;
+      return rsp.data;
+    } catch (error) {
+      toast.error(error?.response?.data?.msg);
+      throw error.message; // Handle and return a specific error message
     }
-  );
-
+  }
+);
 
 export const createExam = createAsyncThunk(
   "/exam/create-exam",
@@ -40,9 +42,10 @@ export const createExam = createAsyncThunk(
         },
         error: "Failed to create exam",
       });
-      return (await response).data;
+      const rsp = await response;
+      return rsp.data;
     } catch (error) {
-      toast.error(error?.response?.data?.msg)
+      toast.error(error?.response?.data?.msg);
       throw error.message; // Handle and return a specific error message
     }
   }
@@ -59,9 +62,10 @@ export const editExam = createAsyncThunk("/exam/edit-exam", async (data) => {
       error: "Failed to edit exam",
     });
     console.log(await response);
-    return (await response).data;
+    const rsp = await response;
+    return rsp.data;
   } catch (error) {
-    toast.error(error?.response?.data?.msg)
+    toast.error(error?.response?.data?.msg);
     throw error.message; // Handle and return a specific error message
   }
 });
@@ -79,9 +83,10 @@ export const deleteExam = createAsyncThunk(
         error: "Failed to delete exam",
       });
       console.log(await response);
-      return (await response).data;
+      const rsp = await response;
+      return rsp.data;
     } catch (error) {
-      toast.error(error?.response?.data?.msg)
+      toast.error(error?.response?.data?.msg);
       throw error.message; // Handle and return a specific error message
     }
   }
@@ -100,9 +105,10 @@ export const createTest = createAsyncThunk(
         error: "Failed to create test",
       });
       // console.log(await response)
-      return (await response).data;
+      const rsp = await response;
+      return rsp.data;
     } catch (error) {
-      toast.error(error?.response?.data?.msg)
+      toast.error(error?.response?.data?.msg);
       throw error.message; // Handle and return a specific error message
     }
   }
@@ -110,7 +116,7 @@ export const createTest = createAsyncThunk(
 
 export const editTest = createAsyncThunk("/exam/edit-test", async (data) => {
   try {
-    console.log(data)
+    console.log(data);
     const response = axiosInstance.post(`/exam/edit-test`, data);
     toast.promise(response, {
       loading: "Wait! Saving Test",
@@ -120,9 +126,10 @@ export const editTest = createAsyncThunk("/exam/edit-test", async (data) => {
       error: "Failed to edit test",
     });
     // console.log(await response)
-    return (await response).data;
+    const rsp = await response;
+    return rsp.data;
   } catch (error) {
-    toast.error(error?.response?.data?.msg)
+    toast.error(error?.response?.data?.msg);
     throw error.message; // Handle and return a specific error message
   }
 });
@@ -140,9 +147,10 @@ export const deleteTest = createAsyncThunk(
         error: "Failed to delete test",
       });
       // console.log(await response)
-      return (await response).data;
+      const rsp = await response;
+      return rsp.data;
     } catch (error) {
-      toast.error(error?.response?.data?.msg)
+      toast.error(error?.response?.data?.msg);
       throw error.message; // Handle and return a specific error message
     }
   }
@@ -161,9 +169,10 @@ export const createQuestion = createAsyncThunk(
         error: "Failed to create question",
       });
       // console.log(await response)
-      return (await response).data;
+      const rsp = await response;
+      return rsp.data;
     } catch (error) {
-      toast.error(error?.response?.data?.msg)
+      toast.error(error?.response?.data?.msg);
       throw error.message; // Handle and return a specific error message
     }
   }
@@ -182,9 +191,10 @@ export const editQuestion = createAsyncThunk(
         error: "Failed to edit test",
       });
       // console.log(await response)
-      return (await response).data;
+      const rsp = await response;
+      return rsp.data;
     } catch (error) {
-      toast.error(error?.response?.data?.msg)
+      toast.error(error?.response?.data?.msg);
       throw error.message; // Handle and return a specific error message
     }
   }
@@ -203,9 +213,10 @@ export const deleteQuestion = createAsyncThunk(
         error: "Failed to delete question",
       });
       // console.log(await response)
-      return (await response).data;
+      const rsp = await response;
+      return rsp.data;
     } catch (error) {
-      toast.error(error?.response?.data?.msg)
+      toast.error(error?.response?.data?.msg);
       throw error.message; // Handle and return a specific error message
     }
   }
@@ -224,9 +235,10 @@ export const createOption = createAsyncThunk(
         error: "Failed to create option",
       });
       // console.log(await response)
-      return (await response).data;
+      const rsp = await response;
+      return rsp.data;
     } catch (error) {
-      toast.error(error?.response?.data?.msg)
+      toast.error(error?.response?.data?.msg);
       throw error.message; // Handle and return a specific error message
     }
   }
@@ -245,9 +257,10 @@ export const editOption = createAsyncThunk(
         error: "Failed to edit option",
       });
       // console.log(await response)
-      return (await response).data;
+      const rsp = await response;
+      return rsp.data;
     } catch (error) {
-      toast.error(error?.response?.data?.msg)
+      toast.error(error?.response?.data?.msg);
       throw error.message; // Handle and return a specific error message
     }
   }
@@ -266,9 +279,10 @@ export const deleteOption = createAsyncThunk(
         error: "Failed to delete option",
       });
       // console.log(await response)
-      return (await response).data;
+      const rsp = await response;
+      return rsp.data;
     } catch (error) {
-      toast.error(error?.response?.data?.msg)
+      toast.error(error?.response?.data?.msg);
       throw error.message; // Handle and return a specific error message
     }
   }
@@ -287,9 +301,10 @@ export const createAnswer = createAsyncThunk(
         error: "Failed to Save Answer",
       });
       // console.log(await response)
-      return (await response).data;
+      const rsp = await response;
+      return rsp.data;
     } catch (error) {
-      toast.error(error?.response?.data?.msg)
+      toast.error(error?.response?.data?.msg);
       throw error.message; // Handle and return a specific error message
     }
   }
@@ -308,9 +323,10 @@ export const editAnswer = createAsyncThunk(
         error: "Failed to edit answer",
       });
       // console.log(await response)
-      return (await response).data;
+      const rsp = await response;
+      return rsp.data;
     } catch (error) {
-      toast.error(error?.response?.data?.msg)
+      toast.error(error?.response?.data?.msg);
       throw error.message; // Handle and return a specific error message
     }
   }
@@ -329,9 +345,10 @@ export const deleteAnswer = createAsyncThunk(
         error: "Failed to delete answer",
       });
       // console.log(await response)
-      return (await response).data;
+      const rsp = await response;
+      return rsp.data;
     } catch (error) {
-      toast.error(error?.response?.data?.msg)
+      toast.error(error?.response?.data?.msg);
       throw error.message; // Handle and return a specific error message
     }
   }
@@ -342,11 +359,10 @@ const instructorSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder
-    .addCase(getExamsByInstructor.fulfilled, (state, action)=>{
-        // console.log(action.payload.allExams)
-        state.instructorExams = action.payload.allExams
-    })
+    builder.addCase(getExamsByInstructor.fulfilled, (state, action) => {
+      // console.log(action.payload.allExams)
+      state.instructorExams = action.payload.allExams;
+    });
   },
 });
 

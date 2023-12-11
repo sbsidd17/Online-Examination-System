@@ -20,6 +20,7 @@ import Footer from "../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllCategory, getAllExams } from "../redux/slices/examSlice";
+import { getAllSliderImage } from "../redux/slices/adminSlice";
 
 function Home() {
   const { isLoggedIn } = useSelector((state) => state.auth);
@@ -28,17 +29,15 @@ function Home() {
   // console.log(exams?.allExams);
   const dispatch = useDispatch();
 
-  async function getCategory() {
+  async function getData() {
     await dispatch(getAllCategory());
+    await dispatch(getAllExams());
+    await dispatch(getAllSliderImage());
   }
 
-  async function getExams() {
-    await dispatch(getAllExams());
-  }
 
   useEffect(() => {
-    getCategory();
-    getExams();
+    getData()
   }, []);
 
   return (
@@ -68,7 +67,7 @@ function Home() {
             <span>Success</span>
           </div>
           <div>
-            {isLoggedIn === "true" ? (
+            {isLoggedIn == "true" ? (
               <Link to={"/explore-exams"}>
                 <button className="bg-green-400 px-5 py-2 text-white rounded-md hover:bg-green-500">
                   Explore Test Series

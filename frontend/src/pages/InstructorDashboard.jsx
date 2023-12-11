@@ -40,7 +40,7 @@ function InstructorDashboard() {
           </h1>
           <div className="w-full flex flex-wrap justify-center items-start gap-5">
             {examData.map((exam) => {
-              return <InstructorExamCard key={exam._id} exam={exam} />;
+              return <InstructorExamCard key={exam._id} exam={exam} getExamData={getExamData}/>;
             })}
           </div>
         </section>

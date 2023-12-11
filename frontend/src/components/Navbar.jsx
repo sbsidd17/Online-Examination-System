@@ -24,11 +24,15 @@ export default function Navbar() {
       href: isLoggedIn ? "/" : "/login",
     },
     {
-      name: isLoggedIn && role === "Student" ? "Dashboard" : "SignUp",
-      href: isLoggedIn ? "/dashboard" : "/signup",
+      name: !isLoggedIn ? "SignUp" : "",
+      href: !isLoggedIn ? "/signup" : "",
     },
     {
-      name: role === "Admin" ? "AdminDashboard" : "",
+      name: role === "Student" ? "Dashboard" : "",
+      href: role === "Student" ? "/dashboard" : "",
+    },
+    {
+      name: role === "Admin"  ? "AdminDashboard" : "",
       href: role === "Admin" ? "/admin-dashboard" : "",
     },
     {

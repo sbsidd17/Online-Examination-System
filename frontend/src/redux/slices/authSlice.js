@@ -22,9 +22,10 @@ export const signup = createAsyncThunk("auth/signUp", async (data) => {
       error: "Failed to create your account",
     });
 
-    return await response.data;
+    const rsp = await response;
+      return rsp.data;
   } catch (error) {
-    toast.error(error?.response?.data?.msg)
+    toast.error(error?.response?.data?.msg);
     throw error.message; // Handle and return a specific error message
   }
 });
@@ -32,18 +33,19 @@ export const signup = createAsyncThunk("auth/signUp", async (data) => {
 //Login
 export const login = createAsyncThunk("/auth/login", async (data) => {
   try {
-    const res = axiosInstance.post("auth/login", data);
+    const response = axiosInstance.post("auth/login", data);
 
-    toast.promise(res, {
+    toast.promise(response, {
       loading: "Wait! authentication in progress...",
       success: (data) => {
         return data?.data?.msg;
       },
       error: "Failed to login",
     });
-    return (await res).data;
+    const rsp = await response;
+      return rsp.data;
   } catch (error) {
-    toast.error(error?.response?.data?.msg)
+    toast.error(error?.response?.data?.msg);
     // console.log(error.response)
     toast.error(error?.response?.data?.msg);
     throw error;
@@ -53,18 +55,18 @@ export const login = createAsyncThunk("/auth/login", async (data) => {
 //Logout
 export const logout = createAsyncThunk("/auth/logout", async () => {
   try {
-    const res = axiosInstance.get("/auth/logout");
+    const response = axiosInstance.get("/auth/logout");
 
-    toast.promise(res, {
+    toast.promise(response, {
       loading: "Wait! logout in progress...",
       success: (data) => {
         return data?.data?.msg;
       },
       error: "Failed to logout",
     });
-    return (await res).data;
+    const rsp = await response;
+      return rsp.data;
   } catch (error) {
-    
     toast.error(error?.response?.data?.msg);
     throw error;
   }
@@ -75,18 +77,18 @@ export const forgotPassword = createAsyncThunk(
   "/auth/forgot-password",
   async (data) => {
     try {
-      const res = axiosInstance.post("/auth/forgot-password", data);
+      const response = axiosInstance.post("/auth/forgot-password", data);
 
-      toast.promise(res, {
+      toast.promise(response, {
         loading: "Wait! Sending Reset Password Link On Your Email...",
         success: (data) => {
           return data?.data?.msg;
         },
         error: "Failed to Send Reset Password Link",
       });
-      return (await res).data;
+      const rsp = await response;
+      return rsp.data;
     } catch (error) {
-     
       toast.error(error?.response?.data?.msg);
       throw error;
     }
@@ -98,18 +100,18 @@ export const resetPassword = createAsyncThunk(
   "/auth/reset-password",
   async (data) => {
     try {
-      const res = axiosInstance.post("/auth/reset-password", data);
+      const response = axiosInstance.post("/auth/reset-password", data);
 
-      toast.promise(res, {
+      toast.promise(response, {
         loading: "Wait! Reseting Your Password...",
         success: (data) => {
           return data?.data?.msg;
         },
         error: "Failed To Reset Password",
       });
-      return (await res).data;
+      const rsp = await response;
+      return rsp.data;
     } catch (error) {
-      
       toast.error(error?.response?.data?.msg);
       throw error;
     }
@@ -121,18 +123,18 @@ export const updateProfile = createAsyncThunk(
   "/auth/update-profile",
   async (data) => {
     try {
-      const res = axiosInstance.post("/auth/update-profile", data);
+      const response = axiosInstance.post("/auth/update-profile", data);
 
-      toast.promise(res, {
+      toast.promise(response, {
         loading: "Updating Profile...",
         success: (data) => {
           return data?.data?.msg;
         },
         error: "Failed to Update",
       });
-      return (await res).data;
+      const rsp = await response;
+      return rsp.data;
     } catch (error) {
-      
       // console.log(error.response)
       toast.error(error?.response?.data?.msg);
       throw error;

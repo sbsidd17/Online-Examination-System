@@ -131,7 +131,7 @@ function EditTest() {
       {test?.questions?.length !== 0 ? (
         <div className="flex flex-wrap justify-center items-center gap-5 w-full">
           {test?.questions?.map((question) => (
-            <QuestionCard key={question._id} data={question} test_id={id} />
+            <QuestionCard key={question._id} data={question} test_id={id} getData={getData}/>
           ))}
         </div>
       ) : (
