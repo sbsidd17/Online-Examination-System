@@ -157,7 +157,52 @@ export const getAllSliderImage = createAsyncThunk(
         error: "Failed to Load",
       });
       // console.log(await response)
-      return (await response).data;
+      const rsp = await response;
+      return rsp.data;
+    } catch (error) {
+      toast.error(error?.response?.data?.msg);
+      throw error.message; // Handle and return a specific error message
+    }
+  }
+);
+
+export const addSliderImage = createAsyncThunk(
+  "/admin/upload-slider-image",
+  async (data) => {
+    try {
+      const response = axiosInstance.post(`/admin/upload-slider-image`, data);
+      toast.promise(response, {
+        loading: "Wait! uploading image...",
+        success: (data) => {
+          return data?.data?.msg;
+        },
+        error: "Failed to upload",
+      });
+      // console.log(await response)
+      const rsp = await response;
+      return rsp.data;
+    } catch (error) {
+      toast.error(error?.response?.data?.msg);
+      throw error.message; // Handle and return a specific error message
+    }
+  }
+);
+
+export const deleteSliderImage = createAsyncThunk(
+  "/admin/delete-slider-image/",
+  async (id) => {
+    try {
+      const response = axiosInstance.get(`/admin/delete-slider-image/${id}`);
+      toast.promise(response, {
+        loading: "Wait! Deleting...",
+        success: (data) => {
+          return data?.data?.msg;
+        },
+        error: "Failed to Delete",
+      });
+      // console.log(await response)
+      const rsp = await response;
+      return rsp.data;
     } catch (error) {
       toast.error(error?.response?.data?.msg);
       throw error.message; // Handle and return a specific error message

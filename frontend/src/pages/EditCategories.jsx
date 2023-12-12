@@ -23,7 +23,6 @@ function EditCategories() {
   const [image, setImage] = useState("");
   const [openAddCategory, setOpenAddCategory] = useState(false);
   async function getData() {
-    console.log("getData Called");
     await dispatch(getAllCategory());
   }
 

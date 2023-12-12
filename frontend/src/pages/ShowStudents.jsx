@@ -1,11 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import {
-  FcConferenceCall,
-  FcCurrencyExchange,
-  FcFullTrash,
-  FcPositiveDynamic,
-} from "react-icons/fc";
+import {FcConferenceCall, FcFullTrash} from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteStudent, getAllStudents } from "../redux/slices/adminSlice";
 import {
