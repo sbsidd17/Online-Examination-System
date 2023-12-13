@@ -116,7 +116,7 @@ const login = async (req, res) => {
 
     //save token in cookies
     res.cookie("jwtToken", jwtToken, {
-      maxAge: 10 * 24 * 60 * 60 * 1000,
+      maxAge: 1 * 24 * 60 * 60 * 1000,
       httpOnly: true,
     });
 
