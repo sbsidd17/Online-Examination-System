@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createOrder, verifyPayment } from "../redux/slices/paymentSlice";
+import { createOrder, verifyPayment } from "../../redux/slices/paymentSlice";
 
 function ExplorePass() {
   const dispatch = useDispatch();

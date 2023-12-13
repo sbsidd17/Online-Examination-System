@@ -1,14 +1,14 @@
 import { Route, Routes } from "react-router-dom";
-import CreateExam from "../pages/CreateExam";
-import CreateTest from "../pages/CreateTest";
-import EditExam from "../pages/editExam";
-import EditTest from "../pages/EditTest";
-import Exam from "../pages/Exam";
-import ExploreExams from "../pages/ExploreExams";
-import ExplorePass from "../pages/ExplorePass";
-import InstructorDashboard from "../pages/InstructorDashboard";
-import ResultPage from "../pages/ResultPage";
-import StartTest from "../pages/StartTest";
+import CreateExam from "../pages/Instructor/CreateExam";
+import CreateTest from "../pages/Instructor/CreateTest";
+import EditTest from "../pages/Instructor/EditTest";
+import EditExam from "../pages/Instructor/EditExam";
+import Exam from "../pages/Home/Exam";
+import ExploreExams from "../pages/Home/ExploreExams";
+import ExplorePass from "../pages/Home/ExplorePass";
+import InstructorDashboard from "../pages/Instructor/InstructorDashboard";
+import ResultPage from "../pages/User/ResultPage";
+import StartTest from "../pages/User/StartTest";
 
 function ExamsRoutes() {
   return (

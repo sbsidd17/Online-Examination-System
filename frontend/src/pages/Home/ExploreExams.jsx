@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import ExamCard2 from "../components/ExamCard2";
+import ExamCard2 from "../../components/ExamCard2";
 
 function ExploreExams() {
   const { exams } = useSelector((state) => state.exam);

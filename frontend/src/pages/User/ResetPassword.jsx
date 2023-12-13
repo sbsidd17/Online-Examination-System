@@ -3,8 +3,8 @@ import toast from "react-hot-toast";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import RestetPasswordImage from "../assets/images/RestetPasswordImage.png";
-import { resetPassword } from "../redux/slices/authSlice";
+import RestetPasswordImage from "../../assets/images/RestetPasswordImage.png";
+import { resetPassword } from "../../redux/slices/authSlice";
 
 function ResetPassword() {
   const [newPassword, setNewPassword] = useState("")

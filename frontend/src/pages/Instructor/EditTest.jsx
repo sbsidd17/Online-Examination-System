@@ -5,9 +5,9 @@ import toast from "react-hot-toast";
 import { FcAddDatabase } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import QuestionCard from "../components/QuestionCard";
-import { editTest } from "../redux/slices/instructorSlice";
-import { getTestData } from "../redux/slices/testSlice";
+import QuestionCard from "../../components/QuestionCard";
+import { editTest } from "../../redux/slices/instructorSlice";
+import { getTestData } from "../../redux/slices/testSlice";
 import CreateQuestion from "./CreateQuestion";
 
 function EditTest() {

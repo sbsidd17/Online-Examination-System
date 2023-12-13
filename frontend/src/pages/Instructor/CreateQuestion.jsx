@@ -7,8 +7,8 @@ import {
   createAnswer,
   createOption,
   createQuestion,
-} from "../redux/slices/instructorSlice";
-import { getQuestionData } from "../redux/slices/testSlice";
+} from "../../redux/slices/instructorSlice";
+import { getQuestionData } from "../../redux/slices/testSlice";
 
 function CreateQuestion({ test_id, setOpenAddQuestion }) {
   const [questionTitle, setQuestionTitle] = useState("");

@@ -2,7 +2,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { createTest } from "../redux/slices/instructorSlice";
+import { createTest } from "../../redux/slices/instructorSlice";
 
 function CreateTest() {
   const { id } = useParams();

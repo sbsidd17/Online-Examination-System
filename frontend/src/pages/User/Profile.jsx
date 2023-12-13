@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FcEditImage } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
-import { updateProfile } from "../redux/slices/authSlice";
+import { updateProfile } from "../../redux/slices/authSlice";
 
 function Profile() {
   const { data } = useSelector((state) => state.auth);

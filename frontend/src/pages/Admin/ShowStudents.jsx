@@ -2,7 +2,7 @@
 
 import {FcConferenceCall, FcFullTrash} from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteStudent, getAllStudents } from "../redux/slices/adminSlice";
+import { deleteStudent, getAllStudents } from "../../redux/slices/adminSlice";
 import {
   ArcElement,
   BarElement,

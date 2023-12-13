@@ -7,7 +7,7 @@ import {
   approveInstructor,
   getAllInstructors,
   unapproveInstructor,
-} from "../redux/slices/adminSlice";
+} from "../../redux/slices/adminSlice";
 
 function ShowInstructors() {
   const dispatch = useDispatch();

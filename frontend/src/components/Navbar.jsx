@@ -13,7 +13,7 @@ function classNames(...classes) {
 export default function Navbar() {
   const { isLoggedIn, data, role } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const navigationData = [
     { name: "Home", href: "/" },
@@ -28,11 +28,7 @@ export default function Navbar() {
       href: !isLoggedIn ? "/signup" : "",
     },
     {
-      name: role === "Student" ? "Dashboard" : "",
-      href: role === "Student" ? "/dashboard" : "",
-    },
-    {
-      name: role === "Admin"  ? "AdminDashboard" : "",
+      name: role === "Admin" ? "AdminDashboard" : "",
       href: role === "Admin" ? "/admin-dashboard" : "",
     },
     {
@@ -41,12 +37,12 @@ export default function Navbar() {
     },
   ];
 
-  const navigation = navigationData.filter(item => item.name !== "");
+  const navigation = navigationData.filter((item) => item.name !== "");
 
   async function signoutHandler() {
     const res = await dispatch(logout());
-    if(res.type === "/auth/logout/fulfilled"){
-      navigate("/")
+    if (res.type === "/auth/logout/fulfilled") {
+      navigate("/");
     }
   }
 
@@ -102,7 +98,11 @@ export default function Navbar() {
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <div>
-                  <h2 className="text-slate-500 hidden md:block">{isLoggedIn ? `${data.first_name} ${data.last_name}` : "Username"}</h2>
+                  <h2 className="text-slate-500 hidden md:block">
+                    {isLoggedIn
+                      ? `${data.first_name} ${data.last_name}`
+                      : "Username"}
+                  </h2>
                 </div>
 
                 {/* Profile dropdown */}
@@ -156,21 +156,6 @@ export default function Navbar() {
                               )}
                             >
                               Your Profile
-                            </Link>
-                          )}
-                        </Menu.Item>
-                      )}
-                      {isLoggedIn && (
-                        <Menu.Item>
-                          {({ active }) => (
-                            <Link
-                              to="/dashboard"
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
-                            >
-                              Dashboard
                             </Link>
                           )}
                         </Menu.Item>

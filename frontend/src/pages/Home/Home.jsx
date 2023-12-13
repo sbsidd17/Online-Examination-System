@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Link, NavLink, Outlet } from "react-router-dom";
-import HomeDataCard from "../components/HomeDataCard";
-import ImageSlideShow from "../components/ImageSlideShow";
+import HomeDataCard from "../../components/HomeDataCard";
+import ImageSlideShow from "../../components/ImageSlideShow";
 import {
   FcAdvance,
   FcApproval,
@@ -13,14 +13,14 @@ import {
   FcInspection,
   FcReading,
 } from "react-icons/fc";
-import explorePass from "../assets/svg/explore-pass.svg";
-import PassCard from "../components/PassCard";
-import ExamCard2 from "../components/ExamCard2";
-import Footer from "../components/Footer";
+import explorePass from "../../assets/svg/explore-pass.svg";
+import PassCard from "../../components/PassCard";
+import ExamCard2 from "../../components/ExamCard2";
+import Footer from "../../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getAllCategory, getAllExams } from "../redux/slices/examSlice";
-import { getAllSliderImage } from "../redux/slices/adminSlice";
+import { getAllCategory, getAllExams } from "../../redux/slices/examSlice";
+import { getAllSliderImage } from "../../redux/slices/adminSlice";
 
 function Home() {
   const { isLoggedIn } = useSelector((state) => state.auth);

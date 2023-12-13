@@ -11,7 +11,7 @@ import {
   Tooltip,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { getAllPayment } from "../redux/slices/adminSlice";
+import { getAllPayment } from "../../redux/slices/adminSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 ChartJS.register(

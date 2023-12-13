@@ -1,14 +1,13 @@
 import { Route, Routes } from "react-router-dom";
 import Category from "../components/Category";
-import AboutPage from "../pages/AboutPage";
-import ContactUsPage from "../pages/ContactUsPage";
-import Dashboard from "../pages/Dashboard";
-import ForgotPassword from "../pages/ForgotPassword";
-import Home from "../pages/Home";
-import Login from "../pages/Login";
-import Profile from "../pages/Profile";
-import ResetPassword from "../pages/ResetPassword";
-import Signup from "../pages/Signup";
+import AboutPage from "../pages/Home/AboutPage";
+import ContactUsPage from "../pages/Home/ContactUsPage";
+import ForgotPassword from "../pages/User/ForgotPassword";
+import Home from "../pages/Home/Home";
+import Login from "../pages/User/Login";
+import Profile from "../pages/User/Profile";
+import ResetPassword from "../pages/User/ResetPassword";
+import Signup from "../pages/User/Signup";
 
 function UserRoutes() {
   return (
@@ -21,7 +20,6 @@ function UserRoutes() {
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/contact" element={<ContactUsPage />} />
     </Routes>

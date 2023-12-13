@@ -2,25 +2,28 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { FcAddImage} from "react-icons/fc";
+import { FcAddDatabase, FcAddImage } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { getAllCategory } from "../redux/slices/examSlice";
-import { createExam } from "../redux/slices/instructorSlice";
+import { Link, useParams } from "react-router-dom";
+import InstructorTestCard from "../../components/InstructorTestCard";
+import { getAllCategory, getExamById } from "../../redux/slices/examSlice";
+import { editExam } from "../../redux/slices/instructorSlice";
 
-function CreateExam() {
+function EditExam() {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const categories = useSelector(
+    (state) => state.exam.categories.allCategories
+  );
+
+  const examData = useSelector((state) => state.exam.exams.curr_exam);
+
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [imageFile, setImageFile] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate()
-  const categories = useSelector(
-    (state) => state.exam.categories.allCategories
-  );
 
   function getImage(e) {
     e.preventDefault();
@@ -40,31 +43,51 @@ function CreateExam() {
   async function submitHandler(e) {
     e.preventDefault();
 
-    if(name === "" || description === "" || price === "" || selectedCategory === "" || imageFile === ""){
-        toast.error("All Feilds Are Mandatory")
-        return;
+    if (
+      name === "" ||
+      description === "" ||
+      price === "" ||
+      selectedCategory === ""
+    ) {
+      toast.error("All Feilds Are Mandatory");
+      return;
     }
-    
+
     const formData = new FormData();
     formData.append("exam_name", name);
     formData.append("exam_description", description);
     formData.append("price", price);
     formData.append("category", selectedCategory);
     formData.append("image", imageFile);
-    const res = await dispatch(createExam(formData))
-    if(res.payload.success){
-      navigate(-1)
-    }
+    formData.append("exam_id", id);
+    const res = await dispatch(editExam(formData));
+    console.log(res);
+  }
+
+  async function getExamData() {
+    await dispatch(getExamById(id));
   }
 
   useEffect(() => {
     dispatch(getAllCategory());
-  }, []);
+    getExamData();
+  }, [id]);
+
+  useEffect(() => {
+    if (examData) {
+      setName(examData.exam_name || "");
+      setImage(examData.thumbnail || "");
+      setPrice(examData.price || "");
+      setDescription(examData.exam_description || "");
+      setSelectedCategory(examData.category || "");
+    }
+  }, [examData]);
 
   return (
-    <div className="mt-[70px] w-full h-[calc(100vh-70px)] p-5 md:p-20 flex justify-center items-center">       
+    <div className="mt-[70px] w-full px-5 md:px-20 py-5 flex justify-center items-center">
       {/* main div */}
-      <div className="flex w-full bg-white shadow-lg p-5">
+      <div className="flex flex-col gap-10 w-full bg-white shadow-lg p-5">
+        {/* edit exam details */}
         <form className="flex flex-col md:flex-row w-full gap-5">
           {/* left */}
           {/* thumbnail */}
@@ -140,13 +163,40 @@ function CreateExam() {
               onClick={submitHandler}
               className="w-[200px] bg-[#0ad0f4] text-white px-5 py-2 rounded-md transition-all duration-200 hover:bg-[#12c1e0] hover:scale-95"
             >
-              Create Exam
+              Save Changes
             </button>
           </div>
         </form>
+        <section className="flex flex-col gap-10 justify-center items-center">
+          {/* Add Test */}
+          <Link
+            to={`/create-test/${id}`}
+          >
+            <button className="flex justify-center items-center gap-2 bg-green-400 px-5 py-2 text-white rounded-md hover:bg-green-500 transition-all duration-200 hover:scale-95">
+              Create New Test
+              <FcAddDatabase size={32} />
+            </button>
+          </Link>
+          {/* Show all test */}
+          <div className="flex flex-col gap-5 justify-center items-center w-full">
+            <h1 className="text-2xl text-slate-500 font-semibold">
+              All Tests ({examData?.all_tests?.length})
+            </h1>
+            {/* test card */}
+            {examData?.all_tests?.length !== 0 ? (
+              <div className="flex flex-wrap justify-center items-center gap-5 w-full">
+                {examData?.all_tests?.map((test) => (
+                  <InstructorTestCard key={test._id} test={test} exam_id={id} getExamData={getExamData} />
+                ))}
+              </div>
+            ) : (
+              <div>You have not created any exam till now...</div>
+            )}
+          </div>
+        </section>
       </div>
     </div>
   );
 }
 
-export default CreateExam;
+export default EditExam;

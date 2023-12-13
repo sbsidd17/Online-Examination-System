@@ -1,4 +1,4 @@
-import GyanBookLogo from "../assets/logo/GyanBookLogo.png";
+import GyanBookLogo from "../../assets/logo/GyanBookLogo.png";
 
 const AboutPage = () => {
   return (

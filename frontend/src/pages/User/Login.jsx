@@ -4,8 +4,8 @@ import { GrMail } from "react-icons/gr";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import LoginImage from "../assets/images/LoginImage.png";
-import { login } from "../redux/slices/authSlice";
+import LoginImage from "../../assets/images/LoginImage.png";
+import { login } from "../../redux/slices/authSlice";
 
 function Login() {
   const [formData, setFormData] = useState({

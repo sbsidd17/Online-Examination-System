@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { GrMail } from "react-icons/gr";
 import { useDispatch } from "react-redux";
-import ForgotPasswordImage from "../assets/images/ForgotPasswordImage.png";
-import { forgotPassword } from "../redux/slices/authSlice";
+import ForgotPasswordImage from "../../assets/images/ForgotPasswordImage.png";
+import { forgotPassword } from "../../redux/slices/authSlice";
 
 function ForgotPassword() {
   const dispatch = useDispatch();

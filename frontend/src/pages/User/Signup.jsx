@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import SignupImage from "../assets/images/SignupImage.png";
+import SignupImage from "../../assets/images/SignupImage.png";
 import { FaUserAlt } from "react-icons/fa";
 import { GrMail } from "react-icons/gr";
 import { RiLockPasswordFill } from "react-icons/ri";
@@ -9,8 +9,8 @@ import { Link, useNavigate } from "react-router-dom";
 import OtpInput from "react-otp-input";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { signup } from "../redux/slices/authSlice";
-import axiosInstance from "../config/axiosInstance";
+import { signup } from "../../redux/slices/authSlice";
+import axiosInstance from "../../config/axiosInstance";
 
 function Signup() {
   const [otp, setOtp] = useState("");

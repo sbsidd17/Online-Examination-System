@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addSliderImage, deleteSliderImage, getAllSliderImage } from "../redux/slices/adminSlice";
+import { addSliderImage, deleteSliderImage, getAllSliderImage } from "../../redux/slices/adminSlice";
 import { FcFullTrash } from "react-icons/fc";
 import { MdCloudUpload, MdDelete } from "react-icons/md";
 import { IoMdAddCircleOutline } from "react-icons/io";

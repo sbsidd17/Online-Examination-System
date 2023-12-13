@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { FcAddDatabase } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import InstructorExamCard from "../components/InstructorExamCard";
-import { getExamsByInstructor } from "../redux/slices/instructorSlice";
+import InstructorExamCard from "../../components/InstructorExamCard";
+import { getExamsByInstructor } from "../../redux/slices/instructorSlice";
 
 function InstructorDashboard() {
   const { id } = useParams();

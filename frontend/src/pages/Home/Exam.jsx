@@ -2,8 +2,8 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
-import TestCard from "../components/TestCard"
-import { getExamById } from "../redux/slices/examSlice"
+import TestCard from "../../components/TestCard"
+import { getExamById } from "../../redux/slices/examSlice"
 
 function Exam() {
   const {id} = useParams()

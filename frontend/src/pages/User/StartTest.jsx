@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState } from "react";
-import "../index.css";
+import "../../index.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { GrClose } from "react-icons/gr";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useEffect } from "react";
-import { getTestData, testResult } from "../redux/slices/testSlice";
-import Timer from "../components/Timer";
+import { getTestData, testResult } from "../../redux/slices/testSlice";
+import Timer from "../../components/Timer";
 
 function StartTest() {
   // State variables

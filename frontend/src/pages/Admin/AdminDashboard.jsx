@@ -11,13 +11,13 @@ import {
 import { FaRegEdit } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Outlet } from "react-router-dom";
-import AdminDashboardCard from "../components/AdminDashboardCard";
+import AdminDashboardCard from "../../components/AdminDashboardCard";
 import {
   getAllInstructors,
   getAllPayment,
   getAllStudents,
-} from "../redux/slices/adminSlice";
-import { getAllExams } from "../redux/slices/examSlice";
+} from "../../redux/slices/adminSlice";
+import { getAllExams } from "../../redux/slices/examSlice";
 
 function AdminDashboard() {
   const { exams } = useSelector((state) => state.exam);

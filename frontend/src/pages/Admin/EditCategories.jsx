@@ -6,12 +6,12 @@ import {
   getAllCategory,
   updateCategory,
   deleteCategory,
-} from "../redux/slices/examSlice";
+} from "../../redux/slices/examSlice";
 import { MdEdit } from "react-icons/md";
 import { useState } from "react";
 import { FaSave } from "react-icons/fa";
 import { IoMdAddCircleOutline } from "react-icons/io";
-import CreateNewCategory from "../components/CreateNewCategory";
+import CreateNewCategory from "../../components/CreateNewCategory";
 
 function EditCategories() {
   const { categories } = useSelector((state) => state.exam);

@@ -7,10 +7,11 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteTest } from "../redux/slices/instructorSlice";
 
-function InstructorTestCard({ test, exam_id }) {
+function InstructorTestCard({ test, exam_id, getExamData }) {
   const dispatch = useDispatch()
 async function deleteHandler(){
     await dispatch(deleteTest({test_id:test._id, exam_id}))
+    getExamData()
 }
   return (
     // main div
