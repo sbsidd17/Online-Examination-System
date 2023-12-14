@@ -18,6 +18,7 @@ export const createCategory = createAsyncThunk(
   async (data) => {
     try {
       const response = axiosInstance.post("/exam/create-category", data);
+      console.log(data)
       toast.promise(response, {
         loading: "Wait! Creating Category",
         success: (data) => {

@@ -39,7 +39,7 @@ function CreateNewCategory({ setOpenAddCategory, getData }) {
     setCategoryName("")
     setCategoryDescription("")
     setImageFile("")
-    setOpenAddCategory()
+    setOpenAddCategory(false)
   }
 
   return (
