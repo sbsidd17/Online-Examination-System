@@ -164,7 +164,7 @@ function ResultPage() {
                   Your Answer :{" "}
                   {answersArray[index] ? answersArray[index] : "Not Answered"}
                 </p>
-                <p>Rigth Answer : {question.answer.answer_title}</p>
+                <p>Rigth Answer : {question?.answer?.answer_title}</p>
               </div>
             );
           })}
