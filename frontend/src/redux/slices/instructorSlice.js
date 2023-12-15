@@ -13,13 +13,13 @@ export const getExamsByInstructor = createAsyncThunk(
       const response = axiosInstance.get(
         `/exam/get-exam-by-instructor/${instructor_id}`
       );
-      toast.promise(response, {
-        loading: "Wait! Loading Exam",
-        success: (data) => {
-          return data?.data?.msg;
-        },
-        error: "Failed to load exam",
-      });
+      // toast.promise(response, {
+      //   loading: "Wait! Loading Exam",
+      //   success: (data) => {
+      //     return data?.data?.msg;
+      //   },
+      //   error: "Failed to load exam",
+      // });
       // console.log(await response);
       const rsp = await response;
       return rsp.data;

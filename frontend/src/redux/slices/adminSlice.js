@@ -17,13 +17,13 @@ export const getAllStudents = createAsyncThunk(
   async () => {
     try {
       const response = axiosInstance.get(`/admin/all-students`);
-      toast.promise(response, {
-        loading: "Wait! Loading Data",
-        success: (data) => {
-          return data?.data?.msg;
-        },
-        error: "Failed to load Data",
-      });
+      // toast.promise(response, {
+      //   loading: "Wait! Loading Data",
+      //   success: (data) => {
+      //     return data?.data?.msg;
+      //   },
+      //   error: "Failed to load Data",
+      // });
       // console.log(await response)
       const rsp = await response;
       return rsp.data;
@@ -39,13 +39,13 @@ export const getAllInstructors = createAsyncThunk(
   async () => {
     try {
       const response = axiosInstance.get(`/admin/all-instructor`);
-      toast.promise(response, {
-        loading: "Wait! Loading Data",
-        success: (data) => {
-          return data?.data?.msg;
-        },
-        error: "Failed to load Data",
-      });
+      // toast.promise(response, {
+      //   loading: "Wait! Loading Data",
+      //   success: (data) => {
+      //     return data?.data?.msg;
+      //   },
+      //   error: "Failed to load Data",
+      // });
       // console.log(await response)
       const rsp = await response;
       return rsp.data;
@@ -127,13 +127,13 @@ export const getAllPayment = createAsyncThunk(
   async () => {
     try {
       const response = axiosInstance.get(`/payment/allPayment?count=100`);
-      toast.promise(response, {
-        loading: "Wait! Geting Details...",
-        success: (data) => {
-          return data?.data?.msg;
-        },
-        error: "Failed to Load",
-      });
+      // toast.promise(response, {
+      //   loading: "Wait! Geting Details...",
+      //   success: (data) => {
+      //     return data?.data?.msg;
+      //   },
+      //   error: "Failed to Load",
+      // });
       // console.log(await response)
       const rsp = await response;
       return rsp.data;
@@ -149,13 +149,13 @@ export const getAllSliderImage = createAsyncThunk(
   async () => {
     try {
       const response = axiosInstance.get(`/admin/getall-slider-image`);
-      toast.promise(response, {
-        loading: "Wait! Geting Data...",
-        success: (data) => {
-          return data?.data?.msg;
-        },
-        error: "Failed to Load",
-      });
+      // toast.promise(response, {
+      //   loading: "Wait! Geting Data...",
+      //   success: (data) => {
+      //     return data?.data?.msg;
+      //   },
+      //   error: "Failed to Load",
+      // });
       // console.log(await response)
       const rsp = await response;
       return rsp.data;
