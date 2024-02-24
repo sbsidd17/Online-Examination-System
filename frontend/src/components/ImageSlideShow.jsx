@@ -20,7 +20,7 @@ const ImageSlideShow = () => {
   return (
     <div>
       <Slide>
-        {sliderImages.map((image) => {
+        {sliderImages?.map((image) => {
           return (
             <div key={image._id} className="each-slide-effect">
               <div style={{ backgroundImage: `url(${image.image})` }}></div>

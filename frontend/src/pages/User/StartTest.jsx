@@ -56,7 +56,7 @@ function StartTest() {
     let n = 0;
 
     for (let i = 0; i < Quizdata?.length; i++) {
-      if (selectedOptions[i] === Quizdata[i]?.answer.answer_title) {
+      if (selectedOptions[i] === Quizdata[i]?.answer?.answer_title) {
         r++;
       } else if (selectedOptions[i] === undefined) {
         n++;
