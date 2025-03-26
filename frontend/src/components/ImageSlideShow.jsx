@@ -6,27 +6,36 @@ import "react-slideshow-image/dist/styles.css";
 import { getAllSliderImage } from "../redux/slices/adminSlice";
 
 const ImageSlideShow = () => {
-  const { sliderImages } = useSelector((state) => state.admin);
+  const { sliderImages, isLoading } = useSelector((state) => state.admin);
   const dispatch = useDispatch();
 
-  async function getData() {
-    await dispatch(getAllSliderImage());
+  useEffect(() => {
+    dispatch(getAllSliderImage());
+  }, [dispatch]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
 
-  useEffect(() => {
-    getData();
-  }, []);
+  if (!sliderImages || sliderImages.length === 0) {
+    return <div>No images available</div>;
+  }
 
   return (
     <div>
       <Slide>
-        {sliderImages?.map((image) => {
-          return (
-            <div key={image._id} className="each-slide-effect">
-              <div style={{ backgroundImage: `url(${image.image})` }}></div>
-            </div>
-          );
-        })}
+        {sliderImages.map((image) => (
+          <div key={image._id} className="each-slide-effect">
+            <div 
+              style={{ 
+                backgroundImage: url(${image.image}),
+                height: '400px',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center'
+              }}
+            ></div>
+          </div>
+        ))}
       </Slide>
     </div>
   );
