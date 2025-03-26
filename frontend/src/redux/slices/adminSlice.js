@@ -10,6 +10,9 @@ const initialState = {
     total_amount: 0
   },
   sliderImages: []
+  sliderImages: [],
+  isLoading: false, // Added loading state
+  error: null // Optional: for error handling
 };
 
 export const getAllStudents = createAsyncThunk(
@@ -148,7 +151,7 @@ export const getAllSliderImage = createAsyncThunk(
   "/admin/getall-slider-image",
   async () => {
     try {
-      const response = axiosInstance.get(`/admin/getall-slider-image`);
+      const response = await axiosInstance.get(`/admin/getall-slider-image`);
       // toast.promise(response, {
       //   loading: "Wait! Geting Data...",
       //   success: (data) => {
@@ -157,8 +160,9 @@ export const getAllSliderImage = createAsyncThunk(
       //   error: "Failed to Load",
       // });
       // console.log(await response)
-      const rsp = await response;
-      return rsp.data;
+      // const rsp = await response;
+      // return rsp.data;
+      return response.data;
     } catch (error) {
       toast.error(error?.response?.data?.msg);
       throw error.message; // Handle and return a specific error message
@@ -228,8 +232,17 @@ const adminSlice = createSlice({
         state.allPayments.all_data = action.payload;
         state.allPayments.total_amount = total_amount
       })
+      .addCase(getAllSliderImage.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
       .addCase(getAllSliderImage.fulfilled, (state, action) => {
-        state.sliderImages = action.payload.sliderImages;
+        state.isLoading = false;
+        state.sliderImages = action.payload.sliderImages || []; // Fallback to empty array
+      })
+      .addCase(getAllSliderImage.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message;
       })
   },
 });
