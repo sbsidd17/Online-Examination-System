@@ -1,4 +1,4 @@
-Link [gyaanbook.vercel.com](https://gyaanbook.vercel.app/)
+Link [gyaanbook.vercel.app](https://gyaanbook.vercel.app/)
 
 Certainly! Here's a point-wise description of a MERN stack online examination system with the mentioned functionalities:
 
